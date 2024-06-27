@@ -1,0 +1,81 @@
+/* Style for the body to center the game area */
+body {
+    display: flex;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    min-height: 100vh; /* Full viewport height */
+    margin: 0; /* Remove default margin */
+    background-color: #282c34; /* Dark background for contrast */
+    font-family: Arial, sans-serif; /* Set a default font */
+}
+
+#container {
+    display: flex;
+    width: 100%; /* Full width of the viewport */
+    max-width: 1800px; /* Maximum width to contain both aside and game board */
+    height: 100%; /* Full height of the viewport */
+}
+
+/* Styles for the aside section with character boxes */
+aside {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr); /* 2 columns */
+    grid-template-rows: repeat(4, 1fr); /* 4 rows */
+    gap: 5px; /* Gap between boxes */
+    padding: 35px;
+    align-items: top;
+    justify-content: center;
+    width: 180px; /* Fixed width for the aside section */
+    background-color: #444234; /* Dark background for the aside */
+    border-right: 5px solid #282c34; /* Border separating aside from the game board */
+
+}
+
+aside .box {
+    background-color: #241700; /* Box color */
+    border: 2px solid #ffffff; /* White border for visibility */
+    padding: 8px;
+    display: flex;
+    width: 80px;
+    height: 100px;
+    align-items: center;
+    justify-content: center;
+    color: #ffffff; /* White text color for contrast */
+    cursor: pointer; /* Pointer cursor to indicate clickable */
+    transition: background-color 0.3s, border-color 0.3s, transform 0.2s ease-in-out; /* Smooth transition for background and border color */
+}
+
+aside .box:hover {
+    background-color: #575757; /* Slightly lighter color on hover */
+    transform: scale(1.05);
+    cursor: pointer;
+}
+
+aside .box.selected {
+    background-color: #843bb4; /* Orange highlight for selected box */
+    border-color: #ffffff; /* Matching border color */
+}
+
+/* Game board styling */
+#game-board {
+    flex-grow: 1; /* Allow the game board to take up the remaining space */
+    width: 1500px; /* Set a width to control the size of the game board */
+    height: 1000px; /* Game board height */
+    background-color: #11002c; /* Dark background for game board */
+    border: 2px solid #00052e; /* Border around the game board */
+    position: relative; /* For positioning child elements */
+    margin-left: 20px; /* Space between the aside and game board */
+}
+
+.player-character {
+    width: 50px; /* Character size */
+    height: 50px; /* Character size */
+    background-color: blue; /* Character color */
+    position: absolute; /* Position relative to game board */
+    top: 50%; /* Center vertically */
+    left: 50%; /* Center horizontally */
+    transform: translate(-50%, -50%); /* Center the character */
+    border-radius: 50%; /* Make the player character round */
+    border: 2px solid #fff; /* White border for visibility */
+    transition: transform 0.3s; /* Smooth movement transitions */
+}
