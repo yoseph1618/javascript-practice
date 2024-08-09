@@ -5,7 +5,7 @@ body {
     align-items: center; /* Center vertically */
     min-height: 100vh; /* Full viewport height */
     margin: 0; /* Remove default margin */
-    background-color: #282c34; /* Dark background for contrast */
+    background-color: #000a1d; /* Dark background for contrast */
     font-family: Arial, sans-serif; /* Set a default font */
 }
 
@@ -28,7 +28,6 @@ aside {
     width: 180px; /* Fixed width for the aside section */
     background-color: #444234; /* Dark background for the aside */
     border-right: 5px solid #282c34; /* Border separating aside from the game board */
-
 }
 
 aside .box {
@@ -36,7 +35,7 @@ aside .box {
     border: 2px solid #ffffff; /* White border for visibility */
     padding: 8px;
     display: flex;
-    width: 80px;
+    width: 90px;
     height: 100px;
     align-items: center;
     justify-content: center;
@@ -56,20 +55,76 @@ aside .box.selected {
     border-color: #ffffff; /* Matching border color */
 }
 
+/* Styles for the settings aside */
+.settings-aside {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 180px; /* Fixed width for the settings aside */
+    height: 950px;
+    background-color: #444234; /* Dark background for the aside */
+    border-right: 5px solid #282c34; /* Border separating aside from the game board */
+    padding: 20px;
+    gap: 20px; /* Space between settings options */
+}
+
+.settings-aside button {
+    padding: 10px;
+    background-color: #241700;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    cursor: pointer;
+    width: 100%;
+    transition: background-color 0.3s, border-color 0.3s;
+    border-radius: 5px;
+}
+
+.settings-aside button:hover {
+    background-color: #575757;
+}
+
+.settings-aside label {
+    color: #ffffff; /* White text color for contrast */
+    font-size: 16px; /* Font size for the label */
+    margin-bottom: 5px; /* Space below the label */
+}
+
+.settings-aside input[type="range"] {
+    width: 100%;
+}
+
 /* Game board styling */
 #game-board {
     flex-grow: 1; /* Allow the game board to take up the remaining space */
     width: 1500px; /* Set a width to control the size of the game board */
     height: 1000px; /* Game board height */
-    background-color: #11002c; /* Dark background for game board */
+    background-color: #391d66; /* Dark background for game board */
     border: 2px solid #00052e; /* Border around the game board */
     position: relative; /* For positioning child elements */
     margin-left: 20px; /* Space between the aside and game board */
 }
 
+#play-button {
+    position: absolute;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 10px 20px;
+    background-color: #241700;
+    color: #ffffff;
+    border: 2px solid #ffffff;
+    cursor: pointer;
+    display: none; /* Initially hidden */
+    transition: background-color 0.3s, transform 0.2s ease-in-out;
+}
+
+#play-button:hover {
+    background-color: #575757;
+}
+
 .player-character {
-    width: 50px; /* Character size */
-    height: 50px; /* Character size */
+    width: 30px; /* Character size */
+    height: 30px; /* Character size */
     background-color: blue; /* Character color */
     position: absolute; /* Position relative to game board */
     top: 50%; /* Center vertically */
@@ -78,4 +133,56 @@ aside .box.selected {
     border-radius: 50%; /* Make the player character round */
     border: 2px solid #fff; /* White border for visibility */
     transition: transform 0.3s; /* Smooth movement transitions */
+}
+
+/* New styles for character image and tab menu */
+.character-image {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    width: 100px;
+    height: 100px;
+    background-size: cover;
+    background-repeat: no-repeat; 
+    background-color: #3d7bff;
+    border: 2px solid #fff; /* White border for visibility */
+    border-radius: 10px; /* Rounded corners */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Shadow effect */
+}
+
+.tabs {
+    position: absolute;
+    top: 130px;
+    right: 10px;
+    width: 120px;
+    display: flex;
+    flex-direction: column;
+    gap: 5px; /* Space between tab buttons */
+}
+
+.tabs button {
+    padding: 8px;
+    background-color: #241700;
+    color: #ffffff;
+    border: 1px solid #ffffff;
+    cursor: pointer;
+    text-align: left;
+    transition: background-color 0.3s, border-color 0.3s;
+}
+
+.tabs button:hover {
+    background-color: #575757;
+}
+
+.tab-content {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+    width: 400px;
+    padding: 15px;
+    border: 2px solid #ffffff;
+    background: #241700;
+    color: #ffffff;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Shadow effect */
 }

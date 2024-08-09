@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Fighter game</title>
+    <title>Survival game</title>
     <link rel="stylesheet" href="style.css"> <!-- Link to the external CSS file -->
 </head>
 
@@ -21,13 +21,20 @@
             <div class="box" data-character="8">Mechanic</div>
         </aside>
         
+        <aside id="settings-aside" class="settings-aside" style="display: none;">
+            <button id="pause-play-button">Pause</button>
+            <label for="volume-control">Volume</label>
+            <input type="range" id="volume-control" min="0" max="100">
+            <button id="quit-button">Quit</button>
+        </aside>
+        
         <!-- Main game board -->
         <div id="game-board">
             <!-- Player character or other game elements will be added here -->
+            <button id="play-button" style="display:none;">Play</button>
         </div>
     </div>
-
-    <!-- External JavaScript file for handling character selection logic -->
+    
     <script src="script.js"></script>
 </body>
 </html>
