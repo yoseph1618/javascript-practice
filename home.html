@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Survival game</title>
+    <link rel="stylesheet" href="homeStyle.css"> <!-- Link to the external CSS file -->
+</head>
+
+<body>
+    <header>
+        <h1>Survival Game</h1>
+        <nav>
+            <ul>
+                <li><a href="index.html">Home</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="contact.html">Contact</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+    <div id="content-container">
+        <div id="container">
+            <!-- Aside section with 8 boxes for character selection -->
+            <aside>
+                <div class="box" data-character="1">Archer</div>
+                <div class="box" data-character="2">Musketeer</div>
+                <div class="box" data-character="3">Monk</div>
+                <div class="box" data-character="4">Ninja</div>
+                <div class="box" data-character="5">Bruiser</div>
+                <div class="box" data-character="6">Vampire</div>
+                <div class="box" data-character="7">Wizard</div>
+                <div class="box" data-character="8">Mechanic</div>
+            </aside>
+            
+            <aside id="settings-aside" class="settings-aside" style="display: none;">
+                <button id="pause-play-button">Pause</button>
+                <label for="volume-control">Volume</label>
+                <input type="range" id="volume-control" min="0" max="100">
+                <button id="quit-button">Quit</button>
+            </aside>
+            
+            <!-- Main game board -->
+            <div id="game-board">
+                <!-- Player character or other game elements will be added here -->
+                <button id="play-button" style="display:none;">Play</button>
+            </div>
+        </div>
+    </div>
+    
+    <script src="home.js"></script>
+</body>
+</html>
