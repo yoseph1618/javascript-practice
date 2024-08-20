@@ -260,8 +260,6 @@ class Mechanic extends Character {
 // Wait for the DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
     const boxes = document.querySelectorAll('aside .box');
-    const selectors = document.querySelectorAll('header .homeButton');
-    let selectedTabId = null;
     let selectedCharacterId = null;
 
     boxes.forEach(box => {
@@ -276,16 +274,6 @@ document.addEventListener('DOMContentLoaded', function() {
             // Show the play button
             const playButton = document.getElementById('play-button');
             playButton.style.display = 'block';
-        });
-    });
-
-    // Main tabs functionality
-    selectors.forEach(selector => {
-        selector.addEventListener('click', function() {
-            selector.forEach(b => b.classList.remove('selected'));
-            this.classList.add('selected');
-            selectedTabId = this.getAttribute('data-button');
-            console.log(`Character ${selectedTabId} selected`);
         });
     });
 

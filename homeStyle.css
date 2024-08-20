@@ -71,9 +71,11 @@ header .homeButton.selected {
 /* Game board styling */
 #game-board {
     width: 80%; /* Set a width to control the size of the game board */
+    max-width: 1600px;
     height: 60%; /* Game board height */
+    max-height: 1300px;
     background-color: #0a0030; /* Dark background for game board */
-    border: 2px solid #00052e; /* Border around the game board */
+    border: 2px solid #e7e7e7; /* Border around the game board */
     position: relative; /* For positioning child elements */
 }
 
@@ -109,6 +111,11 @@ aside {
     border-left: 5px solid #5f3e00; 
     border-top: 5px solid #533600; 
     border-bottom: 5px solid #271900; 
+}
+
+a {
+    color: #fff;
+    font-weight: bold;
 }
 
 aside .box {

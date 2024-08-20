@@ -1,12 +1,19 @@
 /* Style for the body to center the game area */
 body {
-    display: flex;
-    justify-content: center; /* Center horizontally */
-    align-items: center; /* Center vertically */
-    min-height: 100vh; /* Full viewport height */
     margin: 0; /* Remove default margin */
-    background-color: #000a1d; /* Dark background for contrast */
+    background-color: #04091d; /* Dark background for contrast */
     font-family: Arial, sans-serif; /* Set a default font */
+    display: flex;
+    flex-direction: column; /* Stack header on top of content */
+    align-items: center; /* Center content horizontally */
+}
+
+#game-board {
+    width: 1500px; /* Set a width to control the size of the game board */
+    height: 800px; /* Game board height */
+    background-color: #391d66; /* Dark background for game board */
+    border: 2px solid #000000; /* Border around the game board */
+    position: relative; /* For positioning child elements */
 }
 
 #container {
@@ -14,6 +21,26 @@ body {
     width: 100%; /* Full width of the viewport */
     max-width: 1800px; /* Maximum width to contain both aside and game board */
     height: 100%; /* Full height of the viewport */
+}
+
+header {
+    background-color: #271b00;
+    color: white;
+    padding: 10px 0;
+    text-align: center;
+    width: 80%; /* Ensure the header spans the full width */
+    border-bottom: 1px solid #000000;
+
+}
+
+header h1 {
+    margin: 0;
+    font-size: 2em;
+}
+
+.selectedCharacter {
+    color: #fff;
+    font-weight: bold;
 }
 
 /* Styles for the aside section with character boxes */
@@ -91,17 +118,6 @@ aside .box.selected {
 
 .settings-aside input[type="range"] {
     width: 100%;
-}
-
-/* Game board styling */
-#game-board {
-    flex-grow: 1; /* Allow the game board to take up the remaining space */
-    width: 1500px; /* Set a width to control the size of the game board */
-    height: 1000px; /* Game board height */
-    background-color: #391d66; /* Dark background for game board */
-    border: 2px solid #00052e; /* Border around the game board */
-    position: relative; /* For positioning child elements */
-    margin-left: 20px; /* Space between the aside and game board */
 }
 
 #play-button {

@@ -4,36 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Survival game</title>
-    <link rel="stylesheet" href="style.css"> <!-- Link to the external CSS file -->
+    <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
-    <div id="container">
-        <!-- Aside section with 8 boxes for character selection -->
-        <aside>
-            <div class="box" data-character="1">Archer</div>
-            <div class="box" data-character="2">Musketeer</div>
-            <div class="box" data-character="3">Monk</div>
-            <div class="box" data-character="4">Ninja</div>
-            <div class="box" data-character="5">Bruiser</div>
-            <div class="box" data-character="6">Vampire</div>
-            <div class="box" data-character="7">Wizard</div>
-            <div class="box" data-character="8">Mechanic</div>
-        </aside>
+    <header>
+        <h1 class="selectedCharacter">'s HUD</h1>
+    </header>
+
+    <div id="game-board">
         
-        <aside id="settings-aside" class="settings-aside" style="display: none;">
-            <button id="pause-play-button">Pause</button>
-            <label for="volume-control">Volume</label>
-            <input type="range" id="volume-control" min="0" max="100">
-            <button id="quit-button">Quit</button>
-        </aside>
-        
-        <!-- Main game board -->
-        <div id="game-board">
-            <!-- Player character or other game elements will be added here -->
-            <button id="play-button" style="display:none;">Play</button>
-        </div>
     </div>
+
+    <aside id="settings-aside" class="settings-aside" style="display: none;">
+        <button id="pause-play-button">Pause</button>
+        <label for="volume-control">Volume</label>
+        <input type="range" id="volume-control" min="0" max="100">
+        <button id="quit-button">Quit</button>
+    </aside>
     
     <script src="script.js"></script>
 </body>

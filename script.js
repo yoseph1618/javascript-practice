@@ -1,3 +1,9 @@
+// Game start get selected character function
+const selectedCharacter = ${selectedCharacterId} {
+    constructor 
+}
+
+
 // Data structure for tab content
 const characterTabContent = {
     1: {
@@ -80,17 +86,6 @@ const characterTabContent = {
         6: "Friends: Robots, Technicians.",
         7: "Enemies: Saboteurs, Hackers."
     }
-};
-
-const characterAttributes = {
-    1: { speed: 5 }, // Archer
-    2: { speed: 3 }, // Musketeer
-    3: { speed: 6 }, // Monk
-    4: { speed: 5 }, // Ninja
-    5: { speed: 3 }, // Bruiser
-    6: { speed: 4 }, // Vampire
-    7: { speed: 3 }, // Wizard
-    8: { speed: 3 }, // Mechanic
 };
 
 // standard base character stats for all characters to call upon
