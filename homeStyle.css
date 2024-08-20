@@ -119,8 +119,8 @@ a {
 }
 
 aside .box {
-    background-color: #c0a300; /* Box color */
-    border: 2px solid #fffb00; /* White border for visibility */
+    background-color: #0c0c0c; /* Box color */
+    border: 1px solid #adadad; /* White border for visibility */
     padding: 8px;
     display: flex;
     width: 80px;
