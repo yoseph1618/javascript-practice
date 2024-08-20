@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Survival game</title>
+    <title>Survival game home page</title>
     <link rel="stylesheet" href="homeStyle.css"> <!-- Link to the external CSS file -->
 </head>
 
@@ -12,14 +12,14 @@
         <h1>Survival Game</h1>
         <nav>
             <ul>
-                <li><a href="index.html">Home</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="contact.html">Contact</a></li>
+                <li><a class="homeButton" data-button="1">Characters</a></li>
+                <li><a class="homeButton" data-button="2">Support</a></li>
+                <li><a class="homeButton" data-button="3">Contact</a></li>
             </ul>
         </nav>
     </header>
     
-    <div id="content-container">
+    <div id="game-board">
         <div id="container">
             <!-- Aside section with 8 boxes for character selection -->
             <aside>
@@ -40,8 +40,7 @@
                 <button id="quit-button">Quit</button>
             </aside>
             
-            <!-- Main game board -->
-            <div id="game-board">
+            <div>
                 <!-- Player character or other game elements will be added here -->
                 <button id="play-button" style="display:none;">Play</button>
             </div>

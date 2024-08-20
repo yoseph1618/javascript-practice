@@ -260,6 +260,8 @@ class Mechanic extends Character {
 // Wait for the DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
     const boxes = document.querySelectorAll('aside .box');
+    const selectors = document.querySelectorAll('header .homeButton');
+    let selectedTabId = null;
     let selectedCharacterId = null;
 
     boxes.forEach(box => {
@@ -274,6 +276,16 @@ document.addEventListener('DOMContentLoaded', function() {
             // Show the play button
             const playButton = document.getElementById('play-button');
             playButton.style.display = 'block';
+        });
+    });
+
+    // Main tabs functionality
+    selectors.forEach(selector => {
+        selector.addEventListener('click', function() {
+            selector.forEach(b => b.classList.remove('selected'));
+            this.classList.add('selected');
+            selectedTabId = this.getAttribute('data-button');
+            console.log(`Character ${selectedTabId} selected`);
         });
     });
 
@@ -433,68 +445,22 @@ function createSettingsAside() {
     return settingsAside;
 }
 
-function handleMovement(event) {
-    document.addEventListener('DOMContentLoaded', function() {
-        const movementKeys = { 'ArrowUp': false, 'ArrowDown': false, 'ArrowLeft': false, 'ArrowRight': false, 'w': false, 's': false, 'a': false, 'd': false };
-        let moveInterval = null;
-        const stepSize = 5; // Number of pixels to move per interval
-    
-        document.addEventListener('keydown', function(event) {
-            if (movementKeys.hasOwnProperty(event.key)) {
-                movementKeys[event.key] = true;
-                if (!moveInterval) {
-                    moveInterval = setInterval(moveCharacter, 20); // Move every 20ms
-                }
-            }
-        });
-    
-        document.addEventListener('keyup', function(event) {
-            if (movementKeys.hasOwnProperty(event.key)) {
-                movementKeys[event.key] = false;
-                if (Object.values(movementKeys).every(val => !val)) {
-                    clearInterval(moveInterval);
-                    moveInterval = null;
-                }
-            }
-        });
-    
-        function moveCharacter() {
-            const playerCharacter = document.querySelector('.player-character');
-            if (!playerCharacter) return;
+document.addEventListener('DOMContentLoaded', function () {
+    const characterButton = document.querySelector('a[data-button="1"]');
+    const supportButton = document.querySelector('a[data-button="2"]');
+    const contactButton = document.querySelector('a[data-button="3"]');
+    const characterAside = document.querySelector('#container aside:nth-child(1)'); // Assuming the first aside is the character aside
+    const allAsides = document.querySelectorAll('aside');
+
+    // Hide all asides initially
+    allAsides.forEach(aside => aside.style.display = 'none');
+
+    // Toggle character aside when the button is clicked
+    characterButton.addEventListener('click', function () {
+        // Hide all asides first
+        allAsides.forEach(aside => aside.style.display = 'none');
         
-            const gameBoard = document.getElementById('game-board');
-            const gameBoardRect = gameBoard.getBoundingClientRect();
-            const playerRect = playerCharacter.getBoundingClientRect();
-        
-            // Convert current position to integer
-            let newLeft = parseInt(playerCharacter.style.left || '0', 10);
-            let newTop = parseInt(playerCharacter.style.top || '0', 10);
-        
-            // Debug logs to check dimensions
-            console.log('Game Board Rect:', gameBoardRect);
-            console.log('Player Rect:', playerRect);
-            console.log('Current Position:', { newLeft, newTop });
-        
-            // Calculate new position based on movement keys
-            if (movementKeys['ArrowUp'] || movementKeys['w']) {
-                newTop = Math.max(0, newTop - stepSize); // Ensure newTop is not less than 0
-            }
-            if (movementKeys['ArrowDown'] || movementKeys['s']) {
-                newTop = Math.min(gameBoardRect.height - playerRect.height, newTop + stepSize); // Ensure newTop is within the game board
-            }
-            if (movementKeys['ArrowLeft'] || movementKeys['a']) {
-                newLeft = Math.max(0, newLeft - stepSize); // Ensure newLeft is not less than 0
-            }
-            if (movementKeys['ArrowRight'] || movementKeys['d']) {
-                newLeft = Math.min(gameBoardRect.width - playerRect.width, newLeft + stepSize); // Ensure newLeft is within the game board
-            }
-        
-            // Apply the new position
-            playerCharacter.style.left = `${newLeft}px`;
-            playerCharacter.style.top = `${newTop}px`;
-        
-            // Additional debug logs
-            console.log('New Position:', { newLeft, newTop });
-        }
+        // Show the character aside
+        characterAside.style.display = 'grid'; // Ensure the display is 'grid' to maintain the layout
     });
-}
+});
