@@ -14,7 +14,7 @@ Your character starts off at level 1 with their respective base stats.  Those st
 2 atk
 120 atpm
 
-Whenever a player gains enough xp, they level up. Max level is 10.  Whenever a player gains a level, their stats are increased by a percentage.  
+Whenever a player gains enough xp, they level up. Max level is 21.  Whenever a player gains a level, their stats are increased by a set amount, and the player can choose a stat to upgrade.  Max upgrade level for a stat is level 3.
 
 ### The stats and what they do; ###
     Your HP number is the max amount of hit points you can have which starting is 100.

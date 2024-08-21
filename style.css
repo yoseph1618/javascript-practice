@@ -8,14 +8,6 @@ body {
     align-items: center; /* Center content horizontally */
 }
 
-#game-board {
-    width: 1500px; /* Set a width to control the size of the game board */
-    height: 800px; /* Game board height */
-    background-color: #391d66; /* Dark background for game board */
-    border: 2px solid #000000; /* Border around the game board */
-    position: relative; /* For positioning child elements */
-}
-
 #container {
     display: flex;
     width: 100%; /* Full width of the viewport */
@@ -36,11 +28,50 @@ header {
 header h1 {
     margin: 0;
     font-size: 2em;
+    text-decoration: underline;
 }
 
-.selectedCharacter {
+header .level {
+    right: 12%;
+    top: 6%;
+    font-size: 1.5em;
+    font: bold;
     color: #fff;
+    text-decoration: underline;
+    position: relative;
+}
+
+header .xp-container {
+    left: 36%;
+    width: 28%;
+    height: 25px;
+    background-color: #555;
+    border-radius: 5px;
+    position: relative;
+    margin-top: 10px;
+    overflow: hidden;
+}
+
+#xp-bar {
+    height: 100%;
+    width: 0%;
+    background-color: #00b7ff;
+    border-radius: 5px;
+    transition: width 0.3s;
+}
+
+#xp-text {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     font-weight: bold;
+    color: #fff;
+    z-index: 1;
 }
 
 /* Styles for the aside section with character boxes */
@@ -80,6 +111,37 @@ aside .box:hover {
 aside .box.selected {
     background-color: #843bb4; /* Orange highlight for selected box */
     border-color: #ffffff; /* Matching border color */
+}
+
+.stats-aside {
+    display: flex;
+    flex-direction: column;
+    align-content: left;
+    position: fixed; /* Fix the position to the left of the screen */
+    left: 0; /* Align it to the left */
+    top: 0; /* Align it to the top */
+    width: 180px; /* Fixed width for the stats aside */
+    height: 100vh; /* Full height of the viewport */
+    background-color: #444234; /* Dark background for the aside */
+    border-right: 5px solid #282c34; /* Border separating aside from the game board */
+    padding: 10px;
+    gap: 20px;
+    z-index: 1000; /* Ensure it stays above other elements */
+}
+
+.stats-aside div ul p {
+    color: #fff;
+    font: bold;
+}
+
+/* Ensure the game-board is adjusted to accommodate the aside */
+#game-board {
+    width: 100%; /* Reduce width by the aside width */
+    max-width: 1400px;
+    height: 800px; /* Game board height */
+    background-color: #391d66; /* Dark background for game board */
+    border: 2px solid #000000; /* Border around the game board */
+    position: relative; /* For positioning child elements */
 }
 
 /* Styles for the settings aside */

@@ -10,19 +10,46 @@
 <body>
     <header>
         <h1 class="selectedCharacterName"></h1>
+        <div class="level">
+            <span id="lvlNum">Level 1</span>
+        </div>
+        <div class="xp-container">
+            <div id="xp-bar"></div>
+            <span id="xp-text">0 / 500 XP</span>
+        </div>
     </header>
 
     <div id="game-board">
         <!-- Game content here -->
     </div>
 
-    <aside id="settings-aside" class="settings-aside" style="display: none;">
+    <aside class="stats-aside">
+        <div>
+            <ul>
+                <p>HP: x</p>
+                <p>Armr: x</p>
+                <p>Hpe: x</p>
+                <p>Spd: x</p>
+                <p>Rnge: x</p>
+                <p>Atk: x</p>
+                <p>Apm: x</p>
+                <p>Skl 1: x</p>
+                <p>Skl 1: x</p>
+                <p>Skl 1: x</p>
+                <p>Skl 1: x</p>
+            </ul>
+        </div>
+    </aside>
+
+    <!--
+    <aside id="settings-aside" class="settings-aside">
         <button id="pause-play-button">Pause</button>
         <label for="volume-control">Volume</label>
         <input type="range" id="volume-control" min="0" max="100">
         <button id="quit-button">Quit</button>
     </aside>
-    
+    -->
+
     <script src="script.js"></script>
 </body>
 </html>
