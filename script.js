@@ -92,7 +92,7 @@ document.addEventListener('DOMContentLoaded', function () {
         let con = Math.round(19 * x);
         let con2 = Math.round(con * 1.6 + (x * 2));
         let pre = Math.round(las + (diff * 2));
-        let answer = Math.round(pre + con2 - 46);
+        let answer = Math.round(pre + con2 - 48);
 
         return answer;
     }
@@ -171,7 +171,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Example of adding XP (you can replace this with your game's logic)
     setInterval(() => {
-        addXP(1); // Add x XP every 1 second
+        addXP(50); // Add x XP every 1 second
     }, 1000);
 
       // Initialize the HP text on page load
