@@ -128,7 +128,7 @@ document.addEventListener('DOMContentLoaded', function () {
         updateHPText();
         lvlNum.textContent = `Level ${currentLevel}`; // Update the displayed level
         console.log(`Leveled up to ${currentLevel}!`);
-        // upgradeSlots();
+        upgradeSlots();
     }
 
     // Function to add XP
@@ -142,8 +142,7 @@ document.addEventListener('DOMContentLoaded', function () {
     function upgradeSlots() {
         const optionsAvailable = availableTokens;
         if (availableTokens >= 1) {
-            statPage.textContent = `UPGRADES AVAILABLE`;
-            tokenBar.textContent = `Tokens: ${availableTokens}`;
+            statPage.textContent = `${availableTokens} UPGRADES AVAILABLE`;
             statChoice.style.backgroundColor = `#00b7ff`;
             unlockAbility();
         } else {
@@ -153,11 +152,13 @@ document.addEventListener('DOMContentLoaded', function () {
     }
 
     function unlockAbility() {
-        if (availableTokens >= 1 && currentLevel === 3, 5, 7, 9, 11, 13, 15, 17, 19, 21) {
+        const levelsWithUnlock = [3, 5, 7, 9, 11, 13, 15, 17, 19, 21];
+    
+        if (availableTokens >= 1 && levelsWithUnlock.includes(currentLevel)) {
             abilityTokens++;
+            return;
         }
-
-
+    
         if (abilityTokens >= 1) {
             ability.style.backgroundColor = `#00b7ff`;
             ability.style.color = `#fff`;

@@ -44,3 +44,101 @@ class Archer extends Character {
         );
     }
 }
+
+class Musketeer extends Character {
+    constructor() {
+        super(
+            100, 2, 2, 3, 200, 5, 70,
+            ["Multi-shot", "Arrow rain", "Feather mark", "Eagle eye"],
+            "A skilled marksman from the Newea Forest blessed with knowledge and a bow from the wind itself.",
+            "Long-range attacks, speed, and agility.",
+            { speed: 1, attackPerMinute: 20 },
+            ["Monk", "Bruiser", "Wizard"],
+            ["Ninja"]
+        );
+    }
+}
+
+class Monk extends Character {
+    constructor() {
+        super(
+            75, 1, 2, 5, 150, 2, 160,
+            ["Multi-shot", "Arrow rain", "Feather mark", "Eagle eye"],
+            "A skilled marksman from the Newea Forest blessed with knowledge and a bow from the wind itself.",
+            "Long-range attacks, speed, and agility.",
+            { speed: 1, attackPerMinute: 20 },
+            ["Monk", "Bruiser", "Wizard"],
+            ["Ninja"]
+        );
+    }
+}
+
+class Ninja extends Character {
+    constructor() {
+        super(
+            75, 1, 2, 5, 150, 2, 160,
+            ["Multi-shot", "Arrow rain", "Feather mark", "Eagle eye"],
+            "A skilled marksman from the Newea Forest blessed with knowledge and a bow from the wind itself.",
+            "Long-range attacks, speed, and agility.",
+            { speed: 1, attackPerMinute: 20 },
+            ["Monk", "Bruiser", "Wizard"],
+            ["Ninja"]
+        );
+    }
+}
+
+class Bruiser extends Character {
+    constructor() {
+        super(
+            75, 1, 2, 5, 150, 2, 160,
+            ["Multi-shot", "Arrow rain", "Feather mark", "Eagle eye"],
+            "A skilled marksman from the Newea Forest blessed with knowledge and a bow from the wind itself.",
+            "Long-range attacks, speed, and agility.",
+            { speed: 1, attackPerMinute: 20 },
+            ["Monk", "Bruiser", "Wizard"],
+            ["Ninja"]
+        );
+    }
+}
+
+class Vampire extends Character {
+    constructor() {
+        super(
+            75, 1, 2, 5, 150, 2, 160,
+            ["Multi-shot", "Arrow rain", "Feather mark", "Eagle eye"],
+            "A skilled marksman from the Newea Forest blessed with knowledge and a bow from the wind itself.",
+            "Long-range attacks, speed, and agility.",
+            { speed: 1, attackPerMinute: 20 },
+            ["Monk", "Bruiser", "Wizard"],
+            ["Ninja"]
+        );
+    }
+}
+
+class Wizard extends Character {
+    constructor() {
+        super(
+            75, 1, 2, 5, 150, 2, 160,
+            ["Multi-shot", "Arrow rain", "Feather mark", "Eagle eye"],
+            "A skilled marksman from the Newea Forest blessed with knowledge and a bow from the wind itself.",
+            "Long-range attacks, speed, and agility.",
+            { speed: 1, attackPerMinute: 20 },
+            ["Monk", "Bruiser", "Wizard"],
+            ["Ninja"]
+        );
+    }
+}
+
+class Mechanic extends Character {
+    constructor() {
+        super(
+            75, 1, 2, 5, 150, 2, 160,
+            ["Multi-shot", "Arrow rain", "Feather mark", "Eagle eye"],
+            "A skilled marksman from the Newea Forest blessed with knowledge and a bow from the wind itself.",
+            "Long-range attacks, speed, and agility.",
+            { speed: 1, attackPerMinute: 20 },
+            ["Monk", "Bruiser", "Wizard"],
+            ["Ninja"]
+        );
+    }
+}
