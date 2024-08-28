@@ -1,13 +1,98 @@
 // Retrieve the selected character from local storage
-const selectedCharacter = localStorage.getItem('selectedCharacterName');
+let selectedCharacter = localStorage.getItem('selectedCharacterName');
+let selectedCharacterName = null;
+let currentHP;
+let maxHP;
+let Armr;
+let Hpe;
+let Spd;
+let Rnge;
+let Atk;
+let Apm;
 
 // Update the header with the selected character's name
-if (selectedCharacter) {
-    document.querySelector('h1.selectedCharacterName').textContent = `${selectedCharacter}'s HUD`;
+if (selectedCharacter === "Archer") {
+    // Characters and their stats for hud and display
+
+    Armr = 1;
+    Hpe = 2;
+    Spd = 5;
+    Rnge = 150;
+    Atk = 2;
+    Apm = 160;
+
+    currentHP = 75;
+    maxHP = 75;
+
+    skl1 = "Multi-shot";
+    skl2 = "Arrow rain";
+    skl3 = "Feather mark";
+    skl4 = "Eagle eye";
+
+    isSkl1Learned = false;
+    isSkl2Learned = false;
+    isSkl3Learned = false;
+    isSkl4Learned = false;
+
+    document.querySelector('h1.selectedCharacterName').textContent = `Archer's HUD`;
+    // Update the individual stats in the HUD
+    document.querySelector('.box:nth-child(1) h3').textContent = `Armr: ${Armr}`;
+
+    document.querySelector('.box:nth-child(2) h3').textContent = `Hpe: ${Hpe}`;
+
+    document.querySelector('.box:nth-child(3) h3').textContent = `Spd: ${Spd}`;
+
+    document.querySelector('.box:nth-child(4) h3').textContent = `Rnge: ${Rnge}`;
+
+    document.querySelector('.box:nth-child(5) h3').textContent = `Atk: ${Atk}`;
+
+    document.querySelector('.box:nth-child(6) h3').textContent = `Apm: ${Apm}`;
+
+
+} else if (selectedCharacter === "Musketeer") {
+
+    Armr = 2;
+    Hpe = 2;
+    Spd = 3;
+    Rnge = 200;
+    Atk = 5;
+    Apm = 70;
+
+    currentHP = 100;
+    maxHP = 100;
+
+    skl1 = "Rapier thrash";
+    skl2 = "Rapid fire";
+    skl3 = "Piercing shot";
+    skl4 = "Bounce shot";
+
+    isSkl1Learned = false;
+    isSkl2Learned = false;
+    isSkl3Learned = false;
+    isSkl4Learned = false;
+
+
+    document.querySelector('h1.selectedCharacterName').textContent = `Musketeer's HUD`;
+    // Update the individual stats in the HUD
+    document.querySelector('.box:nth-child(1) h3').textContent = `Armr: ${Armr}`;
+
+    document.querySelector('.box:nth-child(2) h3').textContent = `Hpe: ${Hpe}`;
+
+    document.querySelector('.box:nth-child(3) h3').textContent = `Spd: ${Spd}`;
+
+    document.querySelector('.box:nth-child(4) h3').textContent = `Rnge: ${Rnge}`;
+
+    document.querySelector('.box:nth-child(5) h3').textContent = `Atk: ${Atk}`;
+
+    document.querySelector('.box:nth-child(6) h3').textContent = `Apm: ${Apm}`;
+
+} else {
+    console.log("No character chosen.");
 }
 
+
 // Handle character selection
-let selectedCharacterName = null;
+let availableTokens = 0;
 
 
 
@@ -17,9 +102,6 @@ document.addEventListener('DOMContentLoaded', function () {
     let currentXP = 0;
 
     // stats for character able to level up after gaining a level via xp (excluding current and max hp, which are auto upgraded)
-    let currentHP = 75;
-    let maxHP = 75;
-    let availableTokens = 0;
     let abilityTokens = 0;
 
     // set level 1 stats for character
@@ -109,6 +191,7 @@ document.addEventListener('DOMContentLoaded', function () {
         } else if (currentLevel === maxLevel) {
             xpBar.style.width = '100%';
             xpText.textContent = `${currentXP} / Max XP`;
+            availableTokens++;
         }
     }
 
@@ -123,7 +206,6 @@ document.addEventListener('DOMContentLoaded', function () {
         availableTokens++;
         currentXP = 0; // Reset XP after leveling up
         maxHP += 5; // Increase max HP by 5 each level
-        currentHP = maxHP; // Reset current HP to max HP
         updateXPBar();
         updateHPText();
         lvlNum.textContent = `Level ${currentLevel}`; // Update the displayed level
@@ -143,7 +225,6 @@ document.addEventListener('DOMContentLoaded', function () {
         const optionsAvailable = availableTokens;
         if (availableTokens >= 1) {
             statPage.textContent = `${availableTokens} UPGRADES AVAILABLE`;
-            statChoice.style.backgroundColor = `#00b7ff`;
             unlockAbility();
         } else {
             statPage.textContent = `No upgrades available`;
@@ -160,28 +241,13 @@ document.addEventListener('DOMContentLoaded', function () {
         }
     
         if (abilityTokens >= 1) {
-            ability.style.backgroundColor = `#00b7ff`;
-            ability.style.color = `#fff`;
+            console.log(`${abilityTokens} Ability token(s) available!`)
         } else {
-            ability.style.backgroundColor = `#241700`;
-            ability.style.color = `#fff`;
+            console.log(`No ability tokens available.`);
         }
     }
 
-
-
-    // Example of adding XP (you can replace this with your game's logic)
-    setInterval(() => {
-        addXP(50); // Add x XP every 1 second
-    }, 1000);
-
-      // Initialize the HP text on page load
-      updateHPText();
-});
-
-
-
-const boxes = document.querySelectorAll('.character-box');
+    const boxes = document.querySelectorAll('.character-box');
 
 boxes.forEach(box => {
     box.addEventListener('click', function() {
@@ -196,6 +262,157 @@ boxes.forEach(box => {
         playButton.style.display = 'block';
     });
 });
+
+function handleBoxClick(event) {
+    if (availableTokens > 0) {
+        const box = event.currentTarget;
+        const statLevelElement = box.querySelector('p'); // The <p> element showing the level
+        let currentStatLevel = parseInt(statLevelElement.textContent.replace('Lvl: ', ''));
+        const statId = box.querySelector('h3').id; // Get the id of the <h3> element
+        let statValue = parseInt(box.querySelector('h3').textContent.split(': ')[1]); // Get the current stat value
+
+        if (currentStatLevel < 5) {
+            currentStatLevel++;
+            availableTokens--;
+
+            // Add 1 to the stat value using the upgradeValue function
+            statValue = upgradeValue(statId);
+
+            // Update the UI
+            statLevelElement.textContent = `Lvl: ${currentStatLevel}`;
+            box.querySelector('h3').textContent = `${statId}: ${statValue}`;
+
+            // Check if the stat level is maxed out (5)
+            if (currentStatLevel === 5) {
+                box.style.backgroundColor = '#ffae00'; // Change box color when max level is reached
+                statLevelElement.textContent = `Lvl: ${currentStatLevel} (Max)`;
+            }
+        } else {
+            console.log('Max level reached for this stat.');
+        }
+
+        // Update the display of available tokens
+        updateTokenDisplay();
+    } else {
+        console.log('No available tokens to upgrade this stat.');
+    }
+}
+
+function handleBox2Click(event) {
+    if (availableTokens > 0) {
+    const skillElement = event.currentTarget;
+    let currentSkillLevel = parseInt(skillElement.textContent.split(': ')[1].replace('Lvl ', ''));
+    
+    if (currentSkillLevel < 4) {
+        currentSkillLevel++;
+        availableTokens--;
+        skillElement.textContent = `${skillElement.id.replace('Skill', 'Skl ')}: Lvl ${currentSkillLevel}`;
+
+        if (currentSkillLevel === 1) {
+            skillElement.style.backgroundColor = '#006400'; // Deep green color
+            console.log(`${skillElement.id} has become available for use.`);
+
+        } else if (currentSkillLevel > 1) {
+            // Placeholder: Make the effect more powerful with each level up
+            console.log(`${skillElement.id} has become more powerful at level ${currentSkillLevel}.`);
+        }
+
+        if (currentSkillLevel === 4) {
+            skillElement.style.backgroundColor = '#ffae00'; // Change color when max level is reached
+        }
+    }
+        // Update the display of available tokens
+        updateTokenDisplay();
+    } else {
+        console.log('Max level reached for this skill.');
+    }
+}
+
+// Attach the click event listener to each `.box2` element
+document.querySelectorAll('.box2').forEach(box2 => {
+    box2.addEventListener('click', handleBox2Click);
+});
+
+function upgradeValue(stat) {
+    if (selectedCharacter === "Archer") {
+        switch(stat) {
+            case "Armr":
+                Armr += 1;
+                return Armr;
+            case "Hpe":
+                Hpe += 1;
+                return Hpe;
+            case "Spd":
+                Spd += 1;
+                return Spd;
+            case "Rnge":
+                Rnge += 1;
+                return Rnge;
+            case "Atk":
+                Atk += 1;
+                return Atk;
+            case "Apm":
+                Apm += 1;
+                return Apm;
+            default:
+                return 0;
+        }
+    } else if (selectedCharacter === "Musketeer") {
+        switch(stat) {
+            case "Armr":
+                Armr += 1;
+                return Armr;
+            case "Hpe":
+                Hpe += 1;
+                return Hpe;
+            case "Spd":
+                Spd += 1;
+                return Spd;
+            case "Rnge":
+                Rnge += 20;
+                return Rnge;
+            case "Atk":
+                Atk += 1.5;
+                return Atk;
+            case "Apm":
+                Apm += 10;
+                return Apm;
+            default:
+                return 0;
+        }
+    }
+}
+
+
+
+
+
+// Function to update the display of available tokens
+function updateTokenDisplay() {
+    const tokenDisplayElement = document.getElementById('stat-page'); // Assuming you have an element for this
+    if (availableTokens >= 1) {
+        tokenDisplayElement.textContent = `${availableTokens} UPGRADES AVAILABLE`;
+    } else {
+        tokenDisplayElement.textContent = `NO UPGRADES AVAILABLE`;
+    }
+}
+
+// Attach click event listeners to all elements with the class 'box'
+document.querySelectorAll('.box').forEach(box => {
+    box.addEventListener('click', handleBoxClick);
+});
+
+// Initial call to update the token display when the page loads
+
+    // Example of adding XP (you can replace this with your game's logic)
+    setInterval(() => {
+        addXP(50); // Add x XP every 1 second
+    }, 1000);
+
+      // Initialize the HP text on page load
+      updateHPText();
+});
+
 
 // Spawn player character
 function spawnPlayerCharacter(characterName) {
@@ -226,8 +443,6 @@ function spawnPlayerCharacter(characterName) {
 
 function startGameWithCharacter(characterId) {
     console.log(`Game started with character ${characterId}`);
-    // Implement game start logic here, using the characterId
-    // Hide the character selection aside
     const characterSelectionAside = document.querySelector('aside');
     characterSelectionAside.style.display = 'none';
 
@@ -284,70 +499,4 @@ function displayTabContent(characterId, tabId) {
 
     const content = characterTabContent[characterId] ? characterTabContent[characterId][tabId] : 'No content available.';
     tabContent.textContent = content;
-}
-
-function handleMovement(event) {
-    document.addEventListener('DOMContentLoaded', function() {
-        const movementKeys = { 'ArrowUp': false, 'ArrowDown': false, 'ArrowLeft': false, 'ArrowRight': false, 'w': false, 's': false, 'a': false, 'd': false };
-        let moveInterval = null;
-        const stepSize = 5; // Number of pixels to move per interval
-    
-        document.addEventListener('keydown', function(event) {
-            if (movementKeys.hasOwnProperty(event.key)) {
-                movementKeys[event.key] = true;
-                if (!moveInterval) {
-                    moveInterval = setInterval(moveCharacter, 20); // Move every 20ms
-                }
-            }
-        });
-    
-        document.addEventListener('keyup', function(event) {
-            if (movementKeys.hasOwnProperty(event.key)) {
-                movementKeys[event.key] = false;
-                if (Object.values(movementKeys).every(val => !val)) {
-                    clearInterval(moveInterval);
-                    moveInterval = null;
-                }
-            }
-        });
-    
-        function moveCharacter() {
-            const playerCharacter = document.querySelector('.player-character');
-            if (!playerCharacter) return;
-        
-            const gameBoard = document.getElementById('game-board');
-            const gameBoardRect = gameBoard.getBoundingClientRect();
-            const playerRect = playerCharacter.getBoundingClientRect();
-        
-            // Convert current position to integer
-            let newLeft = parseInt(playerCharacter.style.left || '0', 10);
-            let newTop = parseInt(playerCharacter.style.top || '0', 10);
-        
-            // Debug logs to check dimensions
-            console.log('Game Board Rect:', gameBoardRect);
-            console.log('Player Rect:', playerRect);
-            console.log('Current Position:', { newLeft, newTop });
-        
-            // Calculate new position based on movement keys
-            if (movementKeys['ArrowUp'] || movementKeys['w']) {
-                newTop = Math.max(0, newTop - stepSize); // Ensure newTop is not less than 0
-            }
-            if (movementKeys['ArrowDown'] || movementKeys['s']) {
-                newTop = Math.min(gameBoardRect.height - playerRect.height, newTop + stepSize); // Ensure newTop is within the game board
-            }
-            if (movementKeys['ArrowLeft'] || movementKeys['a']) {
-                newLeft = Math.max(0, newLeft - stepSize); // Ensure newLeft is not less than 0
-            }
-            if (movementKeys['ArrowRight'] || movementKeys['d']) {
-                newLeft = Math.min(gameBoardRect.width - playerRect.width, newLeft + stepSize); // Ensure newLeft is within the game board
-            }
-        
-            // Apply the new position
-            playerCharacter.style.left = `${newLeft}px`;
-            playerCharacter.style.top = `${newTop}px`;
-        
-            // Additional debug logs
-            console.log('New Position:', { newLeft, newTop });
-        }
-    });
 }
