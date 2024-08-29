@@ -1,5 +1,6 @@
 // Retrieve the selected character from local storage
 let selectedCharacter = localStorage.getItem('selectedCharacterName');
+let gameBoard = document.getElementById('game-board');
 let selectedCharacterName = null;
 let currentHP;
 let maxHP;
@@ -9,6 +10,47 @@ let Spd;
 let Rnge;
 let Atk;
 let Apm;
+
+// add map interactivity to the map e.g. changing terrain or adding objs for the player
+document.querySelectorAll('.map-cell').forEach(cell => {
+    cell.addEventListener('click', () => {
+        cell.style.backgroundColor = '#4682b4'; // Example: Change to blue for water
+    });
+});
+
+document.addEventListener('DOMContentLoaded', () => {
+    const mapCells = document.querySelectorAll('.map-cell');
+    if (mapCells.length > 0) {
+        mapCells[0].classList.add('visible'); // Make the first cell visible
+    }
+});
+
+function initializeMap() {
+    // Define the size of the map
+    const numRows = 5;
+    const numCols = 5;
+    
+    // Create cells in the grid
+    for (let row = 0; row < numRows; row++) {
+        for (let col = 0; col < numCols; col++) {
+            const cell = document.createElement('div');
+            cell.classList.add('map-cell');
+            gameBoard.appendChild(cell);
+        }
+    }
+
+    // Create the character element
+    const characterElement = document.createElement('div');
+    characterElement.classList.add('player-character');
+    characterElement.textContent = selectedCharacter; // Display the name or use an image
+
+    // Place the character in the first cell
+    const startingCell = gameBoard.querySelector('.map-cell');
+    startingCell.appendChild(characterElement);
+}
+
+// Call the function to initialize the map
+initializeMap();
 
 // Update the header with the selected character's name
 if (selectedCharacter === "Archer") {
@@ -86,6 +128,228 @@ if (selectedCharacter === "Archer") {
 
     document.querySelector('.box:nth-child(6) h3').textContent = `Apm: ${Apm}`;
 
+} else if (selectedCharacter === "Monk") {
+
+    Armr = 2;
+    Hpe = 4;
+    Spd = 6;
+    Rnge = 20;
+    Atk = 1;
+    Apm = 240;
+
+    currentHP = 120;
+    maxHP = 120;
+
+    skl1 = "Rapier thrash";
+    skl2 = "Rapid fire";
+    skl3 = "Piercing shot";
+    skl4 = "Bounce shot";
+
+    isSkl1Learned = false;
+    isSkl2Learned = false;
+    isSkl3Learned = false;
+    isSkl4Learned = false;
+
+
+    document.querySelector('h1.selectedCharacterName').textContent = `Musketeer's HUD`;
+    // Update the individual stats in the HUD
+    document.querySelector('.box:nth-child(1) h3').textContent = `Armr: ${Armr}`;
+
+    document.querySelector('.box:nth-child(2) h3').textContent = `Hpe: ${Hpe}`;
+
+    document.querySelector('.box:nth-child(3) h3').textContent = `Spd: ${Spd}`;
+
+    document.querySelector('.box:nth-child(4) h3').textContent = `Rnge: ${Rnge}`;
+
+    document.querySelector('.box:nth-child(5) h3').textContent = `Atk: ${Atk}`;
+
+    document.querySelector('.box:nth-child(6) h3').textContent = `Apm: ${Apm}`; 
+    
+} else if (selectedCharacter === "Ninja") {
+
+    Armr = 2;
+    Hpe = 1;
+    Spd = 5;
+    Rnge = 40;
+    Atk = 3;
+    Apm = 120;
+
+    currentHP = 90;
+    maxHP = 90;
+
+    skl1 = "Rapier thrash";
+    skl2 = "Rapid fire";
+    skl3 = "Piercing shot";
+    skl4 = "Bounce shot";
+
+    isSkl1Learned = false;
+    isSkl2Learned = false;
+    isSkl3Learned = false;
+    isSkl4Learned = false;
+
+
+    document.querySelector('h1.selectedCharacterName').textContent = `Musketeer's HUD`;
+    // Update the individual stats in the HUD
+    document.querySelector('.box:nth-child(1) h3').textContent = `Armr: ${Armr}`;
+
+    document.querySelector('.box:nth-child(2) h3').textContent = `Hpe: ${Hpe}`;
+
+    document.querySelector('.box:nth-child(3) h3').textContent = `Spd: ${Spd}`;
+
+    document.querySelector('.box:nth-child(4) h3').textContent = `Rnge: ${Rnge}`;
+
+    document.querySelector('.box:nth-child(5) h3').textContent = `Atk: ${Atk}`;
+
+    document.querySelector('.box:nth-child(6) h3').textContent = `Apm: ${Apm}`; 
+    
+} else if (selectedCharacter === "Bruiser") {
+
+    Armr = 3;
+    Hpe = 6;
+    Spd = 3;
+    Rnge = 35;
+    Atk = 6;
+    Apm = 60;
+
+    currentHP = 200;
+    maxHP = 100;
+
+    skl1 = "Rapier thrash";
+    skl2 = "Rapid fire";
+    skl3 = "Piercing shot";
+    skl4 = "Bounce shot";
+
+    isSkl1Learned = false;
+    isSkl2Learned = false;
+    isSkl3Learned = false;
+    isSkl4Learned = false;
+
+
+    document.querySelector('h1.selectedCharacterName').textContent = `Musketeer's HUD`;
+    // Update the individual stats in the HUD
+    document.querySelector('.box:nth-child(1) h3').textContent = `Armr: ${Armr}`;
+
+    document.querySelector('.box:nth-child(2) h3').textContent = `Hpe: ${Hpe}`;
+
+    document.querySelector('.box:nth-child(3) h3').textContent = `Spd: ${Spd}`;
+
+    document.querySelector('.box:nth-child(4) h3').textContent = `Rnge: ${Rnge}`;
+
+    document.querySelector('.box:nth-child(5) h3').textContent = `Atk: ${Atk}`;
+
+    document.querySelector('.box:nth-child(6) h3').textContent = `Apm: ${Apm}`; 
+    
+} else if (selectedCharacter === "Vampire") {
+
+    Armr = 2;
+    Hpe = 2;
+    Spd = 3;
+    Rnge = 200;
+    Atk = 5;
+    Apm = 70;
+
+    currentHP = 100;
+    maxHP = 100;
+
+    skl1 = "Rapier thrash";
+    skl2 = "Rapid fire";
+    skl3 = "Piercing shot";
+    skl4 = "Bounce shot";
+
+    isSkl1Learned = false;
+    isSkl2Learned = false;
+    isSkl3Learned = false;
+    isSkl4Learned = false;
+
+
+    document.querySelector('h1.selectedCharacterName').textContent = `Musketeer's HUD`;
+    // Update the individual stats in the HUD
+    document.querySelector('.box:nth-child(1) h3').textContent = `Armr: ${Armr}`;
+
+    document.querySelector('.box:nth-child(2) h3').textContent = `Hpe: ${Hpe}`;
+
+    document.querySelector('.box:nth-child(3) h3').textContent = `Spd: ${Spd}`;
+
+    document.querySelector('.box:nth-child(4) h3').textContent = `Rnge: ${Rnge}`;
+
+    document.querySelector('.box:nth-child(5) h3').textContent = `Atk: ${Atk}`;
+
+    document.querySelector('.box:nth-child(6) h3').textContent = `Apm: ${Apm}`; 
+    
+} else if (selectedCharacter === "Wizard") {
+
+    Armr = 2;
+    Hpe = 2;
+    Spd = 3;
+    Rnge = 200;
+    Atk = 5;
+    Apm = 70;
+
+    currentHP = 100;
+    maxHP = 100;
+
+    skl1 = "Rapier thrash";
+    skl2 = "Rapid fire";
+    skl3 = "Piercing shot";
+    skl4 = "Bounce shot";
+
+    isSkl1Learned = false;
+    isSkl2Learned = false;
+    isSkl3Learned = false;
+    isSkl4Learned = false;
+
+
+    document.querySelector('h1.selectedCharacterName').textContent = `Musketeer's HUD`;
+    // Update the individual stats in the HUD
+    document.querySelector('.box:nth-child(1) h3').textContent = `Armr: ${Armr}`;
+
+    document.querySelector('.box:nth-child(2) h3').textContent = `Hpe: ${Hpe}`;
+
+    document.querySelector('.box:nth-child(3) h3').textContent = `Spd: ${Spd}`;
+
+    document.querySelector('.box:nth-child(4) h3').textContent = `Rnge: ${Rnge}`;
+
+    document.querySelector('.box:nth-child(5) h3').textContent = `Atk: ${Atk}`;
+
+    document.querySelector('.box:nth-child(6) h3').textContent = `Apm: ${Apm}`; 
+    
+} else if (selectedCharacter === "Mechanic") {
+
+    Armr = 2;
+    Hpe = 2;
+    Spd = 3;
+    Rnge = 200;
+    Atk = 5;
+    Apm = 70;
+
+    currentHP = 100;
+    maxHP = 100;
+
+    skl1 = "Rapier thrash";
+    skl2 = "Rapid fire";
+    skl3 = "Piercing shot";
+    skl4 = "Bounce shot";
+
+    isSkl1Learned = false;
+    isSkl2Learned = false;
+    isSkl3Learned = false;
+    isSkl4Learned = false;
+
+
+    document.querySelector('h1.selectedCharacterName').textContent = `Musketeer's HUD`;
+    // Update the individual stats in the HUD
+    document.querySelector('.box:nth-child(1) h3').textContent = `Armr: ${Armr}`;
+
+    document.querySelector('.box:nth-child(2) h3').textContent = `Hpe: ${Hpe}`;
+
+    document.querySelector('.box:nth-child(3) h3').textContent = `Spd: ${Spd}`;
+
+    document.querySelector('.box:nth-child(4) h3').textContent = `Rnge: ${Rnge}`;
+
+    document.querySelector('.box:nth-child(5) h3').textContent = `Atk: ${Atk}`;
+
+    document.querySelector('.box:nth-child(6) h3').textContent = `Apm: ${Apm}`; 
+    
 } else {
     console.log("No character chosen.");
 }
