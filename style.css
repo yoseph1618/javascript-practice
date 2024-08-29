@@ -253,6 +253,25 @@ ul.box p {
     gap: 20px; /* Space between settings options */
 }
 
+.wall {
+    width: 60px; /* Character size */
+    height: 698px; /* Character size */
+    background-color: rgb(109, 107, 106); /* Character color */
+    position: absolute; /* Position relative to game board */
+    left: 25%;
+    border-right: 2px solid #fff; /* White border for visibility */
+}
+
+.wall-gate {
+    bottom: 0%;
+    left: 40%;
+    width: 50%; /* Character size */
+    height: 6%; /* Character size */
+    background-color: rgb(51, 27, 0); /* Character color */
+    position: absolute; /* Position relative to game board */
+    border: 2px solid #2b2b2b; /* White border for visibility */
+}
+
 .settings-aside button {
     padding: 10px;
     background-color: #241700;
@@ -297,12 +316,10 @@ ul.box p {
 }
 
 .player-character {
-    width: 35px; /* Character size */
-    height: 50px; /* Character size */
+    width: 25px; /* Character size */
+    height: 38px; /* Character size */
     background-color: blue; /* Character color */
     position: absolute; /* Position relative to game board */
-    top: 50%; /* Center vertically */
-    left: 50%; /* Center horizontally */
     border-radius: 50%; /* Make the player character round */
     border: 2px solid #fff; /* White border for visibility */
     transition: transform 0.3s; /* Smooth movement transitions */
@@ -321,6 +338,14 @@ ul.box p {
     border: 2px solid #fff; /* White border for visibility */
     border-radius: 10px; /* Rounded corners */
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); /* Shadow effect */
+}
+
+.projectile {
+    width: 15px;
+    height: 3px;
+    background-color: red;
+    border-radius: 50%;
+    position: absolute;
 }
 
 .tabs {

@@ -2,6 +2,8 @@
 let selectedCharacter = localStorage.getItem('selectedCharacterName');
 let gameBoard = document.getElementById('game-board');
 let selectedCharacterName = null;
+
+// Character stats
 let currentHP;
 let maxHP;
 let Armr;
@@ -11,7 +13,32 @@ let Rnge;
 let Atk;
 let Apm;
 
-// add map interactivity to the map e.g. changing terrain or adding objs for the player
+// Movement variables
+let characterElement;
+const gravityStrength = 1; // Speed of gravity
+let characterPosition = { x: 0, y: 0 };
+let movementDirection = null;
+let lastUpdateTime = 0;
+let isJumping = false;
+let jumpStartY = 0;
+let jumpVelocity = 0;
+let jumpStrength = 16;
+
+// Attack variables
+let isAttacking = false;
+let mouseX, mouseY;
+let lastAttackTime = 0;
+let projectiles = [];  // If basic attack is a projectile
+const projectileSpeed = 10; // Speed of projectile
+const gravity = .1;
+
+// Update the mouse position on mouse move
+document.addEventListener('mousemove', (event) => {
+    mouseX = event.clientX - gameBoard.getBoundingClientRect().left;
+    mouseY = event.clientY - gameBoard.getBoundingClientRect().top;
+});
+
+// Add map interactivity to the map, e.g., changing terrain or adding objects for the player
 document.querySelectorAll('.map-cell').forEach(cell => {
     cell.addEventListener('click', () => {
         cell.style.backgroundColor = '#4682b4'; // Example: Change to blue for water
@@ -40,17 +67,205 @@ function initializeMap() {
     }
 
     // Create the character element
-    const characterElement = document.createElement('div');
+    characterElement = document.createElement('div');
     characterElement.classList.add('player-character');
     characterElement.textContent = selectedCharacter; // Display the name or use an image
+    characterElement.style.position = 'absolute'; // Ensure position is absolute
 
     // Place the character in the first cell
-    const startingCell = gameBoard.querySelector('.map-cell');
-    startingCell.appendChild(characterElement);
+    const wallGate = document.querySelector('.wall-gate');
+    if (wallGate) {
+        wallGate.appendChild(characterElement);
+    } else {
+        console.error('Wall gate not found!');
+    }
+
+    // Initialize character position
+    characterPosition.x = characterElement.offsetLeft;
+    characterPosition.y = characterElement.offsetTop;
+
+    // Start the movement animation loop
+    requestAnimationFrame(updateMovement);
+    applyGravity(characterElement);
 }
+
+// Function for gravity (for characterElement currently)
+function applyGravity(characterElement) {
+    let isGrounded = true;
+    let position = 0; // Initial position of the character
+
+    const gravityInterval = setInterval(() => {
+        if (position < 700 && isGrounded === false) { // Assuming 700px is the cell height
+            position += gravityStrength;
+            characterElement.style.top = `${position}px`;
+        } else {
+            clearInterval(gravityInterval); // Stop the gravity effect once the character lands
+        }
+    }, 10); // Adjust the interval to make the gravity effect smooth
+}
+
+// Function to move the character
+function moveCharacter() {
+    if (movementDirection) {
+        const speed = Spd; // Adjust the speed factor for smoother movement
+        if (movementDirection === 'left') {
+            characterPosition.x -= speed;
+        } else if (movementDirection === 'right') {
+            characterPosition.x += speed;
+        }
+        characterElement.style.left = `${characterPosition.x}px`;
+    }
+}
+
+// Function to handle jumping
+function handleJump() {
+    if (isJumping) {
+        // Update the vertical position of the character
+        jumpVelocity -= gravityStrength; // Apply gravity
+        characterPosition.y -= jumpVelocity;
+        characterElement.style.top = `${characterPosition.y}px`;
+
+        // Check if the character has landed
+        if (characterPosition.y >= jumpStartY) {
+            characterPosition.y = jumpStartY;
+            characterElement.style.top = `${characterPosition.y}px`;
+            isJumping = false;
+            jumpVelocity = 0;
+        }
+    }
+}
+
+// Function to handle basic attack
+function handleAttack() {
+    if (isAttacking) {
+        const now = Date.now();
+        const attackInterval = 60000 / Apm; // Calculate attack interval based on Apm
+
+        if (now - lastAttackTime >= attackInterval) {
+            // Perform attack logic here
+            console.log(`Attack! Damage: ${Atk}, Range: ${Rnge}`);
+
+            // Update the last attack time
+            lastAttackTime = now;
+        }
+    }
+}
+
+// Function to handle movement animation
+function updateMovement(timestamp) {
+    if (lastUpdateTime === 0) lastUpdateTime = timestamp;
+    const deltaTime = timestamp - lastUpdateTime;
+    lastUpdateTime = timestamp;
+
+    if (movementDirection) {
+        moveCharacter();
+    }
+    
+    handleJump(); // Handle jumping logic
+    handleAttack(); // Handle attacking logic
+    requestAnimationFrame(updateMovement);
+}
+
+document.addEventListener('keydown', (event) => {
+    if (event.key === 'a' || event.key === 'A') {
+        movementDirection = 'left';
+    } else if (event.key === 'd' || event.key === 'D') {
+        movementDirection = 'right';
+    } else if (event.key === 'w' || event.key === 'W') {
+        if (!isJumping) {
+            isJumping = true;
+            jumpVelocity = jumpStrength; // Set the initial jump velocity
+            jumpStartY = characterPosition.y; // Set the starting position for the jump
+        }
+    } else if (event.key === ' ') {
+        event.preventDefault(); // Prevent default action for the spacebar (scrolling)
+        if (!isAttacking) {
+            isAttacking = true;
+            launchProjectile(mouseX, mouseY);
+        }
+    }
+});
+
+document.addEventListener('keyup', (event) => {
+    if (event.key === 'a' || event.key === 'A' || event.key === 'd' || event.key === 'D') {
+        movementDirection = null;
+    } else if (event.key === ' ') {
+        isAttacking = false;
+    }
+});
+
+// Function to update the game state
+function updateGame() {
+    updateProjectiles();
+    requestAnimationFrame(updateGame);
+}
+
+// Start the game loop
+updateGame();
 
 // Call the function to initialize the map
 initializeMap();
+
+// Function to create and launch a projectile
+function launchProjectile(mouseX, mouseY) {
+    const projectileElement = document.createElement('div');
+    projectileElement.classList.add('projectile');
+    gameBoard.appendChild(projectileElement);
+
+    // Get the position of the wallGate element
+    const wallGate = document.querySelector('.wall-gate');
+    const wallGateRect = wallGate.getBoundingClientRect();
+
+    // Calculate the offset of the wallGate relative to the game board
+    const wallGateOffsetX = wallGateRect.left;
+    const wallGateOffsetY = wallGateRect.top;
+
+    // Set initial position of the projectile
+    let projectilePosition = {
+        x: characterPosition.x + wallGateOffsetX,
+        y: characterPosition.y + wallGateOffsetY,
+    };
+
+    // Calculate the direction of the projectile
+    const angle = Math.atan2(mouseY - projectilePosition.y, mouseX - projectilePosition.x);
+    let velocity = {
+        x: projectileSpeed * Math.cos(angle),
+        y: projectileSpeed * Math.sin(angle)
+    };
+
+    // Store projectile data
+    projectiles.push({
+        element: projectileElement,
+        position: projectilePosition,
+        velocity: velocity,
+        launchTime: Date.now()
+    });
+
+      // Position the projectile element
+    projectileElement.style.left = `${projectilePosition.x}px`;
+    projectileElement.style.top = `${projectilePosition.y}px`;
+}
+
+// Function to update projectile positions
+function updateProjectiles() {
+    const now = Date.now(); // Get current time
+    projectiles.forEach((proj, index) => {
+        // Apply gravity
+        proj.velocity.y += gravity;
+        proj.position.x += proj.velocity.x;
+        proj.position.y += proj.velocity.y;
+
+        // Update projectile position
+        proj.element.style.left = `${proj.position.x}px`;
+        proj.element.style.top = `${proj.position.y}px`;
+
+        // Check if 3 seconds have passed since launch
+        if (now - proj.launchTime > 3000) {
+            proj.element.remove();
+            projectiles.splice(index, 1);
+        }
+    });
+}
 
 // Update the header with the selected character's name
 if (selectedCharacter === "Archer") {
@@ -79,18 +294,11 @@ if (selectedCharacter === "Archer") {
     document.querySelector('h1.selectedCharacterName').textContent = `Archer's HUD`;
     // Update the individual stats in the HUD
     document.querySelector('.box:nth-child(1) h3').textContent = `Armr: ${Armr}`;
-
     document.querySelector('.box:nth-child(2) h3').textContent = `Hpe: ${Hpe}`;
-
     document.querySelector('.box:nth-child(3) h3').textContent = `Spd: ${Spd}`;
-
     document.querySelector('.box:nth-child(4) h3').textContent = `Rnge: ${Rnge}`;
-
     document.querySelector('.box:nth-child(5) h3').textContent = `Atk: ${Atk}`;
-
     document.querySelector('.box:nth-child(6) h3').textContent = `Apm: ${Apm}`;
-
-
 } else if (selectedCharacter === "Musketeer") {
 
     Armr = 2;
