@@ -34,7 +34,7 @@ const gravity = .1;
 
 // Update the mouse position on mouse move
 document.addEventListener('mousemove', (event) => {
-    mouseX = event.clientX - gameBoard.getBoundingClientRect().left;
+    mouseX = event.clientX - gameBoard.getBoundingClientRect().left + 450;
     mouseY = event.clientY - gameBoard.getBoundingClientRect().top;
 });
 
@@ -53,6 +53,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 function initializeMap() {
+    
     // Define the size of the map
     const numRows = 5;
     const numCols = 5;
@@ -65,6 +66,17 @@ function initializeMap() {
             gameBoard.appendChild(cell);
         }
     }
+
+    // Set the mouse position to a specific point within the game board
+    const x = 1000; // X coordinate within the game board
+    const y = 1000; // Y coordinate within the game board
+
+    const mouseEvent = new MouseEvent('mousemove', {
+        clientX: x + gameBoard.getBoundingClientRect().left,
+        clientY: y + gameBoard.getBoundingClientRect().top
+    });
+
+    gameBoard.dispatchEvent(mouseEvent);
 
     // Create the character element
     characterElement = document.createElement('div');
@@ -140,11 +152,13 @@ function handleAttack() {
     if (isAttacking) {
         const now = Date.now();
         const attackInterval = 60000 / Apm; // Calculate attack interval based on Apm
+        console.log(`Apm is:`, Apm);
 
         if (now - lastAttackTime >= attackInterval) {
             // Perform attack logic here
             console.log(`Attack! Damage: ${Atk}, Range: ${Rnge}`);
-
+            launchProjectile(mouseX, mouseY);
+            
             // Update the last attack time
             lastAttackTime = now;
         }
@@ -181,7 +195,6 @@ document.addEventListener('keydown', (event) => {
         event.preventDefault(); // Prevent default action for the spacebar (scrolling)
         if (!isAttacking) {
             isAttacking = true;
-            launchProjectile(mouseX, mouseY);
         }
     }
 });
