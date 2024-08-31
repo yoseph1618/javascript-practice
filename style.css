@@ -179,6 +179,16 @@ ul.box p {
 }
 
 /* Ensure the game-board is adjusted to accommodate the aside */
+#game-container {
+    position: relative;
+    width: 800px; /* Set the width of the visible area */
+    height: 600px; /* Set the height of the visible area */
+    overflow: hidden; /* Hide the parts of the game board that are outside the container */
+    margin: 0 auto; /* Center the container horizontally */
+    border: 2px solid #000; /* Optional: Add a border around the container */
+    background-color: #f0f0f0; /* Optional: Set a background color for the container */
+}
+
 #game-board {
     width: 50%;
     height: 40%;
@@ -202,7 +212,20 @@ ul.box p {
     height: 700px;
     background-color: #3b0057;
     border: 1px solid #000;
-    visibility: hidden; /* Make cells invisible initially */
+}
+
+.map-cell-2 {
+    width: 1000px;
+    height: 400px;
+    background-color: #3b0057;
+    border: 1px solid #000;
+}
+
+.map-cell-3 {
+    width: 7000px;
+    height: 8000px;
+    background-color: #3b0057;
+    border: 1px solid #000;
 }
 
 .map-cell.visible {

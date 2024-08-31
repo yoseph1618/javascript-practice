@@ -1,7 +1,5 @@
 // Retrieve the selected character from local storage
-let selectedCharacter = localStorage.getItem('selectedCharacterName');
 let gameBoard = document.getElementById('game-board');
-let selectedCharacterName = null;
 
 // Character stats
 let currentHP;
@@ -41,15 +39,8 @@ document.addEventListener('mousemove', (event) => {
 // Add map interactivity to the map, e.g., changing terrain or adding objects for the player
 document.querySelectorAll('.map-cell').forEach(cell => {
     cell.addEventListener('click', () => {
-        cell.style.backgroundColor = '#4682b4'; // Example: Change to blue for water
+        // cell.style.backgroundColor = '#4682b4'; // Example: Change to blue for water
     });
-});
-
-document.addEventListener('DOMContentLoaded', () => {
-    const mapCells = document.querySelectorAll('.map-cell');
-    if (mapCells.length > 0) {
-        mapCells[0].classList.add('visible'); // Make the first cell visible
-    }
 });
 
 function initializeMap() {
@@ -81,7 +72,6 @@ function initializeMap() {
     // Create the character element
     characterElement = document.createElement('div');
     characterElement.classList.add('player-character');
-    characterElement.textContent = selectedCharacter; // Display the name or use an image
     characterElement.style.position = 'absolute'; // Ensure position is absolute
 
     // Place the character in the first cell
@@ -158,11 +148,64 @@ function handleAttack() {
             // Perform attack logic here
             console.log(`Attack! Damage: ${Atk}, Range: ${Rnge}`);
             launchProjectile(mouseX, mouseY);
-            
             // Update the last attack time
             lastAttackTime = now;
         }
     }
+}
+
+// Function to create and launch a projectile
+function launchProjectile(mouseX, mouseY) {
+    const projectileElement = document.createElement('div');
+    projectileElement.classList.add('projectile');
+    gameBoard.appendChild(projectileElement);
+
+    // Set initial position of the projectile
+    let projectilePosition = {
+        x: characterPosition.x + (characterElement.offsetWidth / 2) - (projectileElement.offsetWidth / 2),
+        y: characterPosition.y + (characterElement.offsetHeight / 2) - (projectileElement.offsetHeight / 2)
+    };
+
+    // Calculate the direction of the projectile
+    const angle = Math.atan2(mouseY - projectilePosition.y, mouseX - projectilePosition.x);
+    let velocity = {
+        x: projectileSpeed * Math.cos(angle),
+        y: projectileSpeed * Math.sin(angle)
+    };
+
+    // Store projectile data
+    projectiles.push({
+        element: projectileElement,
+        position: projectilePosition,
+        velocity: velocity,
+        launchTime: Date.now() // Store launch time for the projectile
+    });
+}
+
+// Function to update projectile positions
+function updateProjectiles() {
+    projectiles.forEach((proj, index) => {
+        // Check if 3 seconds have passed since the projectile was launched
+        if (Date.now() - proj.launchTime >= 3000) {
+            proj.element.remove();
+            projectiles.splice(index, 1);
+            return;
+        }
+
+        proj.velocity.y += gravity; // Apply gravity
+        proj.position.x += proj.velocity.x;
+        proj.position.y += proj.velocity.y;
+
+        // Update projectile position
+        proj.element.style.left = `${proj.position.x}px`;
+        proj.element.style.top = `${proj.position.y}px`;
+
+        // Remove projectile if it goes out of bounds or hits an enemy
+        if (proj.position.y > gameBoard.offsetHeight || proj.position.x < 0 || proj.position.x > gameBoard.offsetWidth) {
+            proj.element.remove();
+            projectiles.splice(index, 1);
+        }
+    });
 }
 
 // Function to handle movement animation
@@ -209,7 +252,6 @@ document.addEventListener('keyup', (event) => {
 
 // Function to update the game state
 function updateGame() {
-    updateProjectiles();
     requestAnimationFrame(updateGame);
 }
 
@@ -219,68 +261,9 @@ updateGame();
 // Call the function to initialize the map
 initializeMap();
 
-// Function to create and launch a projectile
-function launchProjectile(mouseX, mouseY) {
-    const projectileElement = document.createElement('div');
-    projectileElement.classList.add('projectile');
-    gameBoard.appendChild(projectileElement);
-
-    // Get the position of the wallGate element
-    const wallGate = document.querySelector('.wall-gate');
-    const wallGateRect = wallGate.getBoundingClientRect();
-
-    // Calculate the offset of the wallGate relative to the game board
-    const wallGateOffsetX = wallGateRect.left;
-    const wallGateOffsetY = wallGateRect.top;
-
-    // Set initial position of the projectile
-    let projectilePosition = {
-        x: characterPosition.x + wallGateOffsetX,
-        y: characterPosition.y + wallGateOffsetY,
-    };
-
-    // Calculate the direction of the projectile
-    const angle = Math.atan2(mouseY - projectilePosition.y, mouseX - projectilePosition.x);
-    let velocity = {
-        x: projectileSpeed * Math.cos(angle),
-        y: projectileSpeed * Math.sin(angle)
-    };
-
-    // Store projectile data
-    projectiles.push({
-        element: projectileElement,
-        position: projectilePosition,
-        velocity: velocity,
-        launchTime: Date.now()
-    });
-
-      // Position the projectile element
-    projectileElement.style.left = `${projectilePosition.x}px`;
-    projectileElement.style.top = `${projectilePosition.y}px`;
-}
-
-// Function to update projectile positions
-function updateProjectiles() {
-    const now = Date.now(); // Get current time
-    projectiles.forEach((proj, index) => {
-        // Apply gravity
-        proj.velocity.y += gravity;
-        proj.position.x += proj.velocity.x;
-        proj.position.y += proj.velocity.y;
-
-        // Update projectile position
-        proj.element.style.left = `${proj.position.x}px`;
-        proj.element.style.top = `${proj.position.y}px`;
-
-        // Check if 3 seconds have passed since launch
-        if (now - proj.launchTime > 3000) {
-            proj.element.remove();
-            projectiles.splice(index, 1);
-        }
-    });
-}
-
 // Update the header with the selected character's name
+    let selectedCharacter = localStorage.getItem('selectedCharacterName');
+    let selectedCharacterName = null;
 if (selectedCharacter === "Archer") {
     // Characters and their stats for hud and display
 
@@ -312,6 +295,7 @@ if (selectedCharacter === "Archer") {
     document.querySelector('.box:nth-child(4) h3').textContent = `Rnge: ${Rnge}`;
     document.querySelector('.box:nth-child(5) h3').textContent = `Atk: ${Atk}`;
     document.querySelector('.box:nth-child(6) h3').textContent = `Apm: ${Apm}`;
+
 } else if (selectedCharacter === "Musketeer") {
 
     Armr = 2;
