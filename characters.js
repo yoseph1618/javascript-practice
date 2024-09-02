@@ -1,144 +1,296 @@
-// Character setup and functions
-// standard base character stats for all characters to call upon
-class Character {
-    constructor(hp, armor, hope, speed, range, attack, attackPerMinute, skills, backstory, strengths, bonuses, friends, enemies) {
-        this.hp = hp;
-        this.armor = armor;
-        this.hope = hope;
-        this.speed = speed;
-        this.range = range;
-        this.attack = attack;
-        this.attackPerMinute = attackPerMinute;
-        this.skills = skills;
-        this.backstory = backstory;
-        this.strengths = strengths;
-        this.bonuses = bonuses;
-        this.friends = friends;
-        this.enemies = enemies;
-    }
-}
+let selectedCharacter = localStorage.getItem('selectedCharacterName');
+let selectedCharacterName = null;
+if (selectedCharacter === "Archer") {
+// Characters and their stats for hud and display
 
-// TODO: MAY NOT NEED THIS, DEPENDING
-const characterAttributes = {
-    Archer: { speed: 5 },
-    Musketeer: { speed: 3 },
-    Monk: { speed: 6 },
-    Ninja: { speed: 5 },
-    Bruiser: { speed: 3 },
-    Vampire: { speed: 4 },
-    Wizard: { speed: 3 },
-    Mechanic: { speed: 3 }
-};
+Armr = 1;
+Hpe = 2;
+Spd = 5;
+Rnge = 150;
+Atk = 2;
+Apm = 160;
 
-// Define specific character classes
-class Archer extends Character {
-    constructor() {
-        super(
-            75, 1, 2, 5, 150, 2, 160,
-            ["Multi-shot", "Arrow rain", "Feather mark", "Eagle eye"],
-            "A skilled marksman from the Newea Forest blessed with knowledge and a bow from the wind itself.",
-            "Long-range attacks, speed, and agility.",
-            { speed: 1, attackPerMinute: 20 },
-            ["Monk", "Bruiser", "Wizard"],
-            ["Ninja"]
-        );
-    }
-}
+currentHP = 75;
+maxHP = 75;
 
-class Musketeer extends Character {
-    constructor() {
-        super(
-            100, 2, 2, 3, 200, 5, 70,
-            ["Multi-shot", "Arrow rain", "Feather mark", "Eagle eye"],
-            "A skilled marksman from the Newea Forest blessed with knowledge and a bow from the wind itself.",
-            "Long-range attacks, speed, and agility.",
-            { speed: 1, attackPerMinute: 20 },
-            ["Monk", "Bruiser", "Wizard"],
-            ["Ninja"]
-        );
-    }
-}
+skl1 = "Multi-shot";
+skl2 = "Arrow rain";
+skl3 = "Feather mark";
+skl4 = "Eagle eye";
 
-class Monk extends Character {
-    constructor() {
-        super(
-            75, 1, 2, 5, 150, 2, 160,
-            ["Multi-shot", "Arrow rain", "Feather mark", "Eagle eye"],
-            "A skilled marksman from the Newea Forest blessed with knowledge and a bow from the wind itself.",
-            "Long-range attacks, speed, and agility.",
-            { speed: 1, attackPerMinute: 20 },
-            ["Monk", "Bruiser", "Wizard"],
-            ["Ninja"]
-        );
-    }
-}
+isSkl1Learned = false;
+isSkl2Learned = false;
+isSkl3Learned = false;
+isSkl4Learned = false;
 
-class Ninja extends Character {
-    constructor() {
-        super(
-            75, 1, 2, 5, 150, 2, 160,
-            ["Multi-shot", "Arrow rain", "Feather mark", "Eagle eye"],
-            "A skilled marksman from the Newea Forest blessed with knowledge and a bow from the wind itself.",
-            "Long-range attacks, speed, and agility.",
-            { speed: 1, attackPerMinute: 20 },
-            ["Monk", "Bruiser", "Wizard"],
-            ["Ninja"]
-        );
-    }
-}
+document.querySelector('h1.selectedCharacterName').textContent = `Archer's HUD`;
+// Update the individual stats in the HUD
+document.querySelector('.box:nth-child(1) h3').textContent = `Armr: ${Armr}`;
+document.querySelector('.box:nth-child(2) h3').textContent = `Hpe: ${Hpe}`;
+document.querySelector('.box:nth-child(3) h3').textContent = `Spd: ${Spd}`;
+document.querySelector('.box:nth-child(4) h3').textContent = `Rnge: ${Rnge}`;
+document.querySelector('.box:nth-child(5) h3').textContent = `Atk: ${Atk}`;
+document.querySelector('.box:nth-child(6) h3').textContent = `Apm: ${Apm}`;
 
-class Bruiser extends Character {
-    constructor() {
-        super(
-            75, 1, 2, 5, 150, 2, 160,
-            ["Multi-shot", "Arrow rain", "Feather mark", "Eagle eye"],
-            "A skilled marksman from the Newea Forest blessed with knowledge and a bow from the wind itself.",
-            "Long-range attacks, speed, and agility.",
-            { speed: 1, attackPerMinute: 20 },
-            ["Monk", "Bruiser", "Wizard"],
-            ["Ninja"]
-        );
-    }
-}
+} else if (selectedCharacter === "Musketeer") {
 
-class Vampire extends Character {
-    constructor() {
-        super(
-            75, 1, 2, 5, 150, 2, 160,
-            ["Multi-shot", "Arrow rain", "Feather mark", "Eagle eye"],
-            "A skilled marksman from the Newea Forest blessed with knowledge and a bow from the wind itself.",
-            "Long-range attacks, speed, and agility.",
-            { speed: 1, attackPerMinute: 20 },
-            ["Monk", "Bruiser", "Wizard"],
-            ["Ninja"]
-        );
-    }
-}
+Armr = 2;
+Hpe = 2;
+Spd = 3;
+Rnge = 200;
+Atk = 5;
+Apm = 70;
 
-class Wizard extends Character {
-    constructor() {
-        super(
-            75, 1, 2, 5, 150, 2, 160,
-            ["Multi-shot", "Arrow rain", "Feather mark", "Eagle eye"],
-            "A skilled marksman from the Newea Forest blessed with knowledge and a bow from the wind itself.",
-            "Long-range attacks, speed, and agility.",
-            { speed: 1, attackPerMinute: 20 },
-            ["Monk", "Bruiser", "Wizard"],
-            ["Ninja"]
-        );
-    }
-}
+currentHP = 100;
+maxHP = 100;
 
-class Mechanic extends Character {
-    constructor() {
-        super(
-            75, 1, 2, 5, 150, 2, 160,
-            ["Multi-shot", "Arrow rain", "Feather mark", "Eagle eye"],
-            "A skilled marksman from the Newea Forest blessed with knowledge and a bow from the wind itself.",
-            "Long-range attacks, speed, and agility.",
-            { speed: 1, attackPerMinute: 20 },
-            ["Monk", "Bruiser", "Wizard"],
-            ["Ninja"]
-        );
-    }
+skl1 = "Rapier thrash";
+skl2 = "Rapid fire";
+skl3 = "Piercing shot";
+skl4 = "Bounce shot";
+
+isSkl1Learned = false;
+isSkl2Learned = false;
+isSkl3Learned = false;
+isSkl4Learned = false;
+
+
+document.querySelector('h1.selectedCharacterName').textContent = `Musketeer's HUD`;
+// Update the individual stats in the HUD
+document.querySelector('.box:nth-child(1) h3').textContent = `Armr: ${Armr}`;
+
+document.querySelector('.box:nth-child(2) h3').textContent = `Hpe: ${Hpe}`;
+
+document.querySelector('.box:nth-child(3) h3').textContent = `Spd: ${Spd}`;
+
+document.querySelector('.box:nth-child(4) h3').textContent = `Rnge: ${Rnge}`;
+
+document.querySelector('.box:nth-child(5) h3').textContent = `Atk: ${Atk}`;
+
+document.querySelector('.box:nth-child(6) h3').textContent = `Apm: ${Apm}`;
+
+} else if (selectedCharacter === "Monk") {
+
+Armr = 2;
+Hpe = 4;
+Spd = 6;
+Rnge = 20;
+Atk = 1;
+Apm = 240;
+
+currentHP = 120;
+maxHP = 120;
+
+skl1 = "Rapier thrash";
+skl2 = "Rapid fire";
+skl3 = "Piercing shot";
+skl4 = "Bounce shot";
+
+isSkl1Learned = false;
+isSkl2Learned = false;
+isSkl3Learned = false;
+isSkl4Learned = false;
+
+
+document.querySelector('h1.selectedCharacterName').textContent = `Musketeer's HUD`;
+// Update the individual stats in the HUD
+document.querySelector('.box:nth-child(1) h3').textContent = `Armr: ${Armr}`;
+
+document.querySelector('.box:nth-child(2) h3').textContent = `Hpe: ${Hpe}`;
+
+document.querySelector('.box:nth-child(3) h3').textContent = `Spd: ${Spd}`;
+
+document.querySelector('.box:nth-child(4) h3').textContent = `Rnge: ${Rnge}`;
+
+document.querySelector('.box:nth-child(5) h3').textContent = `Atk: ${Atk}`;
+
+document.querySelector('.box:nth-child(6) h3').textContent = `Apm: ${Apm}`; 
+
+} else if (selectedCharacter === "Ninja") {
+
+Armr = 2;
+Hpe = 1;
+Spd = 5;
+Rnge = 40;
+Atk = 3;
+Apm = 120;
+
+currentHP = 90;
+maxHP = 90;
+
+skl1 = "Rapier thrash";
+skl2 = "Rapid fire";
+skl3 = "Piercing shot";
+skl4 = "Bounce shot";
+
+isSkl1Learned = false;
+isSkl2Learned = false;
+isSkl3Learned = false;
+isSkl4Learned = false;
+
+
+document.querySelector('h1.selectedCharacterName').textContent = `Musketeer's HUD`;
+// Update the individual stats in the HUD
+document.querySelector('.box:nth-child(1) h3').textContent = `Armr: ${Armr}`;
+
+document.querySelector('.box:nth-child(2) h3').textContent = `Hpe: ${Hpe}`;
+
+document.querySelector('.box:nth-child(3) h3').textContent = `Spd: ${Spd}`;
+
+document.querySelector('.box:nth-child(4) h3').textContent = `Rnge: ${Rnge}`;
+
+document.querySelector('.box:nth-child(5) h3').textContent = `Atk: ${Atk}`;
+
+document.querySelector('.box:nth-child(6) h3').textContent = `Apm: ${Apm}`; 
+
+} else if (selectedCharacter === "Bruiser") {
+
+Armr = 3;
+Hpe = 6;
+Spd = 3;
+Rnge = 35;
+Atk = 6;
+Apm = 60;
+
+currentHP = 200;
+maxHP = 100;
+
+skl1 = "Rapier thrash";
+skl2 = "Rapid fire";
+skl3 = "Piercing shot";
+skl4 = "Bounce shot";
+
+isSkl1Learned = false;
+isSkl2Learned = false;
+isSkl3Learned = false;
+isSkl4Learned = false;
+
+
+document.querySelector('h1.selectedCharacterName').textContent = `Musketeer's HUD`;
+// Update the individual stats in the HUD
+document.querySelector('.box:nth-child(1) h3').textContent = `Armr: ${Armr}`;
+
+document.querySelector('.box:nth-child(2) h3').textContent = `Hpe: ${Hpe}`;
+
+document.querySelector('.box:nth-child(3) h3').textContent = `Spd: ${Spd}`;
+
+document.querySelector('.box:nth-child(4) h3').textContent = `Rnge: ${Rnge}`;
+
+document.querySelector('.box:nth-child(5) h3').textContent = `Atk: ${Atk}`;
+
+document.querySelector('.box:nth-child(6) h3').textContent = `Apm: ${Apm}`; 
+
+} else if (selectedCharacter === "Vampire") {
+
+Armr = 2;
+Hpe = 2;
+Spd = 3;
+Rnge = 200;
+Atk = 5;
+Apm = 70;
+
+currentHP = 100;
+maxHP = 100;
+
+skl1 = "Rapier thrash";
+skl2 = "Rapid fire";
+skl3 = "Piercing shot";
+skl4 = "Bounce shot";
+
+isSkl1Learned = false;
+isSkl2Learned = false;
+isSkl3Learned = false;
+isSkl4Learned = false;
+
+
+document.querySelector('h1.selectedCharacterName').textContent = `Musketeer's HUD`;
+// Update the individual stats in the HUD
+document.querySelector('.box:nth-child(1) h3').textContent = `Armr: ${Armr}`;
+
+document.querySelector('.box:nth-child(2) h3').textContent = `Hpe: ${Hpe}`;
+
+document.querySelector('.box:nth-child(3) h3').textContent = `Spd: ${Spd}`;
+
+document.querySelector('.box:nth-child(4) h3').textContent = `Rnge: ${Rnge}`;
+
+document.querySelector('.box:nth-child(5) h3').textContent = `Atk: ${Atk}`;
+
+document.querySelector('.box:nth-child(6) h3').textContent = `Apm: ${Apm}`; 
+
+} else if (selectedCharacter === "Wizard") {
+
+Armr = 2;
+Hpe = 2;
+Spd = 3;
+Rnge = 200;
+Atk = 5;
+Apm = 70;
+
+currentHP = 100;
+maxHP = 100;
+
+skl1 = "Rapier thrash";
+skl2 = "Rapid fire";
+skl3 = "Piercing shot";
+skl4 = "Bounce shot";
+
+isSkl1Learned = false;
+isSkl2Learned = false;
+isSkl3Learned = false;
+isSkl4Learned = false;
+
+
+document.querySelector('h1.selectedCharacterName').textContent = `Musketeer's HUD`;
+// Update the individual stats in the HUD
+document.querySelector('.box:nth-child(1) h3').textContent = `Armr: ${Armr}`;
+
+document.querySelector('.box:nth-child(2) h3').textContent = `Hpe: ${Hpe}`;
+
+document.querySelector('.box:nth-child(3) h3').textContent = `Spd: ${Spd}`;
+
+document.querySelector('.box:nth-child(4) h3').textContent = `Rnge: ${Rnge}`;
+
+document.querySelector('.box:nth-child(5) h3').textContent = `Atk: ${Atk}`;
+
+document.querySelector('.box:nth-child(6) h3').textContent = `Apm: ${Apm}`; 
+
+} else if (selectedCharacter === "Mechanic") {
+
+Armr = 2;
+Hpe = 2;
+Spd = 3;
+Rnge = 200;
+Atk = 5;
+Apm = 70;
+
+currentHP = 100;
+maxHP = 100;
+
+skl1 = "Rapier thrash";
+skl2 = "Rapid fire";
+skl3 = "Piercing shot";
+skl4 = "Bounce shot";
+
+isSkl1Learned = false;
+isSkl2Learned = false;
+isSkl3Learned = false;
+isSkl4Learned = false;
+
+
+document.querySelector('h1.selectedCharacterName').textContent = `Musketeer's HUD`;
+// Update the individual stats in the HUD
+document.querySelector('.box:nth-child(1) h3').textContent = `Armr: ${Armr}`;
+
+document.querySelector('.box:nth-child(2) h3').textContent = `Hpe: ${Hpe}`;
+
+document.querySelector('.box:nth-child(3) h3').textContent = `Spd: ${Spd}`;
+
+document.querySelector('.box:nth-child(4) h3').textContent = `Rnge: ${Rnge}`;
+
+document.querySelector('.box:nth-child(5) h3').textContent = `Atk: ${Atk}`;
+
+document.querySelector('.box:nth-child(6) h3').textContent = `Apm: ${Apm}`; 
+
+} else {
+console.log("No character chosen.");
 }

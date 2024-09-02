@@ -718,19 +718,26 @@ document.addEventListener('DOMContentLoaded', function () {
 
     const boxes = document.querySelectorAll('.character-box');
 
-boxes.forEach(box => {
-    box.addEventListener('click', function() {
-        boxes.forEach(b => b.classList.remove('selected'));
-        this.classList.add('selected');
-        selectedCharacterName = this.getAttribute('data-character');
-        console.log(`Character ${selectedCharacterName} selected`);
-        spawnPlayerCharacter(selectedCharacterName);
-        displayCharacterDetails(selectedCharacterName);
-
-        const playButton = document.getElementById('play-button');
-        playButton.style.display = 'block';
+    boxes.forEach(box => {
+        box.addEventListener('click', function() {
+            boxes.forEach(b => b.classList.remove('selected'));
+            this.classList.add('selected');
+            selectedCharacterName = this.getAttribute('data-character');
+            console.log(`Character ${selectedCharacterName} selected`);
+    
+            // Retrieve character stats from `characters.js`
+            const characterData = characters[selectedCharacterName];
+    
+            // Store selected character data in localStorage
+            localStorage.setItem('selectedCharacter', JSON.stringify(characterData));
+    
+            // Optional: Display the selected character's details
+            displayCharacterDetails(selectedCharacterName);
+    
+            const playButton = document.getElementById('play-button');
+            playButton.style.display = 'block';
+        });
     });
-});
 
 function handleBoxClick(event) {
     if (availableTokens > 0) {
@@ -952,20 +959,4 @@ function spawnPlayerCharacter(characterId) {
 
     const gameBoard = document.getElementById('game-board');
     gameBoard.appendChild(playerCharacter);
-}
-
-function displayTabContent(characterId, tabId) {
-    let tabContent = document.getElementById('tab-content');
-    if (!tabContent) {
-        tabContent = document.createElement('div');
-        tabContent.id = 'tab-content';
-        tabContent.style.color = '#fff';
-        tabContent.style.padding = '10px';
-        tabContent.style.marginTop = '10px';
-        const gameBoard = document.getElementById('game-board');
-        gameBoard.appendChild(tabContent);
-    }
-
-    const content = characterTabContent[characterId] ? characterTabContent[characterId][tabId] : 'No content available.';
-    tabContent.textContent = content;
 }
