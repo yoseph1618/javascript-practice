@@ -8,7 +8,27 @@
 </head>
 
 <body>
-    <header>
+    <div id="intro-section">
+        <div id="title-container">
+            <div id="half-circle"> <!-- main gold square -->
+                <div id="half-circle2"></div> 
+                <div id="half-circle4"></div>
+                <div id="half-circle5"></div>
+                <div id="half-circle6"></div>
+                <div id="half-circle3">
+                    <div id="display1"></div>
+                    <div id="display2"></div> 
+                    <div id="display3"></div> 
+                    <div id="display4"></div>
+                    <div id="display5"></div> 
+                </div>
+                <div id="hoverLock1"></div>
+            </div>
+        </div>
+        <button id="start-button">Start Game</button>
+    </div>
+
+    <header id="main-header" style="display: none;">
         <h1>Survival Game</h1>
         <nav>
             <ul>
@@ -19,10 +39,8 @@
         </nav>
     </header>
     
-    <div id="game-board">
+    <div id="game-board" style="display: none;">
         <div id="container">
-
-            <!-- Aside section with 8 boxes for character selection -->
             <aside>
                 <div class="box" data-character="Archer">Archer</div>
                 <div class="box" data-character="Musketeer">Musketeer</div>
@@ -42,12 +60,11 @@
             </aside>
             
             <div>
-                <!-- Player character or other game elements will be added here -->
-                <button id="play-button" style="display:none;"><a href="index.html">Play</a></button>
+                <button id="play-button" style="display:none;"></button>
             </div>
         </div>
     </div>
-    
+
     <script src="home.js"></script>
 </body>
 </html>

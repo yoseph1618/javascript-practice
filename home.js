@@ -1,3 +1,20 @@
+document.getElementById('start-button').addEventListener('click', function() {
+    // Hide the intro section
+    document.getElementById('intro-section').style.display = 'none';
+
+    // Show the rest of the page and fade it in
+    const header = document.getElementById('main-header');
+    const gameBoard = document.getElementById('game-board');
+    
+    header.style.display = 'block';
+    gameBoard.style.display = 'block';
+
+    setTimeout(function() {
+        header.style.opacity = '1';
+        gameBoard.style.opacity = '1';
+    }, 50); // Timeout for smooth transition
+});
+
 // Data structure for tab content
 const characterTabContent = {
     Archer: {
@@ -74,177 +91,6 @@ const characterTabContent = {
     }
 };
 
-const characterAttributes = {
-    Archer: { speed: 5 },
-    Musketeer: { speed: 3 },
-    Monk: { speed: 6 },
-    Ninja: { speed: 5 },
-    Bruiser: { speed: 3 },
-    Vampire: { speed: 4 },
-    Wizard: { speed: 3 },
-    Mechanic: { speed: 3 }
-};
-
-// standard base character stats for all characters to call upon
-class Character {
-    constructor(hp, armor, hope, speed, range, attack, attackPerMinute, skills, backstory, strengths, bonuses, friends, enemies) {
-        this.hp = hp;
-        this.armor = armor;
-        this.hope = hope;
-        this.speed = speed;
-        this.range = range;
-        this.attack = attack;
-        this.attackPerMinute = attackPerMinute;
-        this.skills = skills;
-        this.backstory = backstory;
-        this.strengths = strengths;
-        this.bonuses = bonuses;
-        this.friends = friends;
-        this.enemies = enemies;
-    }
-}
-
-// Define specific character classes
-class Archer extends Character {
-    constructor() {
-        super(
-            75, 1, 2, 5, 150, 2, 160,
-            ["Multi-shot", "Arrow rain", "Feather mark", "Eagle eye"],
-            "A skilled marksman from the Newea Forest blessed with knowledge and a bow from the wind itself.",
-            "Long-range attacks, speed, and agility.",
-            { speed: 1, attackPerMinute: 20 },
-            ["Monk", "Bruiser", "Wizard"],
-            ["Ninja"]
-        );
-    }
-}
-
-class Musketeer extends Character {
-    constructor() {
-        super(
-        this.hp = 75,
-        this.armor = 1,
-        this.hope = 2,
-        this.speed = 5,
-        this.range = 150,
-        this.attack = 2,
-        this.attackPerMinute = 160,
-        this.skills = ["Multi-shot", "Arrow rain", "Feather mark", "Eagle eye"],
-        this.bonuses = { speed: 1, attackPerMinute: 20 },
-        this.friends = ["Monk", "Bruiser", "Wizard"],
-        this.enemies = ["Ninja"],
-        );
-    }
-} 
-
-class Monk extends Character {
-    constructor() {
-        super(
-        this.hp = 75,
-        this.armor = 1,
-        this.hope = 2,
-        this.speed = 5,
-        this.range = 150,
-        this.attack = 2,
-        this.attackPerMinute = 160,
-        this.skills = ["Multi-shot", "Arrow rain", "Feather mark", "Eagle eye"],
-        this.bonuses = { speed: 1, attackPerMinute: 20 },
-        this.friends = ["Monk", "Bruiser", "Wizard"],
-        this.enemies = ["Ninja"],
-        );
-    }
-} 
-
-class Ninja extends Character {
-    constructor() {
-        super(
-        this.hp = 75,
-        this.armor = 1,
-        this.hope = 2,
-        this.speed = 5,
-        this.range = 150,
-        this.attack = 2,
-        this.attackPerMinute = 160,
-        this.skills = ["Multi-shot", "Arrow rain", "Feather mark", "Eagle eye"],
-        this.bonuses = { speed: 1, attackPerMinute: 20 },
-        this.friends = ["Monk", "Bruiser", "Wizard"],
-        this.enemies = ["Ninja"],
-        );
-    }
-} 
-
-class Bruiser extends Character {
-    constructor() {
-        super(
-        this.hp = 75,
-        this.armor = 1,
-        this.hope = 2,
-        this.speed = 5,
-        this.range = 150,
-        this.attack = 2,
-        this.attackPerMinute = 160,
-        this.skills = ["Multi-shot", "Arrow rain", "Feather mark", "Eagle eye"],
-        this.bonuses = { speed: 1, attackPerMinute: 20 },
-        this.friends = ["Monk", "Bruiser", "Wizard"],
-        this.enemies = ["Ninja"],
-        );
-    }
-} 
-
-class Vampire extends Character {
-    constructor() {
-        super(
-        this.hp = 75,
-        this.armor = 1,
-        this.hope = 2,
-        this.speed = 5,
-        this.range = 150,
-        this.attack = 2,
-        this.attackPerMinute = 160,
-        this.skills = ["Multi-shot", "Arrow rain", "Feather mark", "Eagle eye"],
-        this.bonuses = { speed: 1, attackPerMinute: 20 },
-        this.friends = ["Monk", "Bruiser", "Wizard"],
-        this.enemies = ["Ninja"],
-        );
-    }
-} 
-
-class Wizard extends Character {
-    constructor() {
-        super(
-        this.hp = 75,
-        this.armor = 1,
-        this.hope = 2,
-        this.speed = 5,
-        this.range = 150,
-        this.attack = 2,
-        this.attackPerMinute = 160,
-        this.skills = ["Multi-shot", "Arrow rain", "Feather mark", "Eagle eye"],
-        this.bonuses = { speed: 1, attackPerMinute: 20 },
-        this.friends = ["Monk", "Bruiser", "Wizard"],
-        this.enemies = ["Ninja"],
-        );
-    }
-} 
-
-class Mechanic extends Character {
-    constructor() {
-        super(
-        this.hp = 75,
-        this.armor = 1,
-        this.hope = 2,
-        this.speed = 5,
-        this.range = 150,
-        this.attack = 2,
-        this.attackPerMinute = 160,
-        this.skills = ["Multi-shot", "Arrow rain", "Feather mark", "Eagle eye"],
-        this.bonuses = { speed: 1, attackPerMinute: 20 },
-        this.friends = ["Monk", "Bruiser", "Wizard"],
-        this.enemies = ["Ninja"],
-        );
-    }
-} 
-
 // Wait for the DOM to be fully loaded
 document.addEventListener('DOMContentLoaded', function() {
     const boxes = document.querySelectorAll('aside .box');
@@ -280,13 +126,9 @@ document.addEventListener('DOMContentLoaded', function() {
      });
 
     // Handle keydown events for character movement
-    document.addEventListener('keydown', handleMovement);
 });
 
 function startGameWithCharacter(characterName) {
-    console.log(`Game started with character ${characterName}`);
-    // Implement game start logic here, using the characterName
-    // Hide the character selection aside
     const characterSelectionAside = document.querySelector('aside');
     characterSelectionAside.style.display = 'none';
 

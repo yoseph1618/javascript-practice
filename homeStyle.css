@@ -1,11 +1,255 @@
 /* Style for the body to center the game area */
 body {
     margin: 0; /* Remove default margin */
+    padding: 0;
     background-color: #04091d; /* Dark background for contrast */
     font-family: Arial, sans-serif; /* Set a default font */
     display: flex;
     flex-direction: column; /* Stack header on top of content */
     align-items: center; /* Center content horizontally */
+}
+
+#intro-section {
+    position: absolute;
+    height: 100%;
+    width: 100%;
+}
+
+#title-container {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+}
+
+#half-circle {
+    width: 160px;
+    height: 160px;
+    border: 4px solid #ceaf0083;
+    animation: spin 12s infinite linear;
+}
+
+#half-circle2 {
+    position: absolute;
+    width: 80px;
+    height: 80px;
+    border: 1px solid #a200ff75;
+    animation: spin2 4s infinite linear;
+}
+
+#half-circle3 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 80px;
+    height: 80px;
+    border: 1px solid #a200ff;
+    animation: spin3 3s infinite linear;
+    transition: animation 0.3s;
+}
+
+#half-circle4 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 80px;
+    height: 80px;
+    border: 1px solid #a200ff75;
+    animation: spin4 4s infinite linear;
+}
+
+#half-circle5 {
+    position: absolute;
+    top: 100%;
+    width: 80px;
+    height: 80px;
+    border: 1px solid #a200ff75;
+    animation: spin5 4s infinite linear;
+}
+
+#half-circle6 {
+    position: absolute;
+    left: 100%;
+    width: 80px;
+    height: 80px;
+    border: 1px solid #a200ff75;
+    animation: spin5 4s infinite linear;
+}
+
+#display1 {
+    position: absolute;
+    left: 100%;
+    width: 120px;
+    height: 1px;
+    border: 1px solid #a200ff;
+    animation: spin7 3s infinite linear;
+}
+
+#display2 {
+    position: absolute;
+    top: 100%;
+    width: 120px;
+    height: 1px;
+    border: 1px solid #a200ff;
+    animation: spin7 3s infinite linear;
+}
+
+#display3 {
+    position: absolute;
+    width: 1px;
+    height: 120px;
+    border: 1px solid #a200ff;
+    animation: spin7 3s infinite linear;
+}
+
+#display4 {
+    position: absolute;
+    top: 100%;
+    left: 100%;
+    width: 1px;
+    height: 120px;
+    border: 1px solid #a200ff;
+    animation: spin7 3s infinite linear;
+}
+
+#display5 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 235px;
+    height: 235px;
+    border-radius: 50%;
+    border: 1px solid #9e9e9e81;
+    animation: spin 3s infinite linear;
+}
+
+#hoverLock1 {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 235px;
+    height: 235px;
+    border: 2px solid #9e9e9e81;
+    border-top: hidden;
+    border-bottom: hidden;
+    border-left: hidden;
+    animation: spin10 5s infinite linear;
+    visibility: hidden;
+    transition: visibility .2s;
+}
+
+/* Spinning animation */
+@keyframes spin {
+    from {
+        transform: translateX(-50%) translateY(-50%) rotate(0deg);
+    }
+    to {
+        transform: translateX(-50%) translateY(-50%) rotate(360deg);
+    }
+}
+
+@keyframes spin2 {
+    from {
+        transform: translateX(-50%) translateY(-50%) rotate(0deg);
+    }
+    to {
+        transform: translateX(-50%) translateY(-50%) rotate(-360deg);
+    }
+}
+
+@keyframes spin3 {
+    from {
+        transform: translateX(-50%) translateY(-50%) rotate(0deg);
+    }
+    to {
+        transform: translateX(-50%) translateY(-50%) rotate(-360deg);
+    }
+}
+
+@keyframes spin4 {
+    from {
+        transform: translateX(50%) translateY(50%) rotate(0deg);
+    }
+    to {
+        transform: translateX(50%) translateY(50%) rotate(-360deg);
+    }
+}
+
+@keyframes spin5 {
+    from {
+        transform: translateX(-50%) translateY(-50%) rotate(0deg);
+    }
+    to {
+        transform: translateX(-50%) translateY(-50%) rotate(-360deg);
+    }
+}
+
+@keyframes spin6 {
+    from {
+        transform: translateX(-50%) translateY(-50%) rotate(0deg);
+    }
+    to {
+        transform: translateX(-50%) translateY(-50%) rotate(-360deg);
+    }
+}
+
+@keyframes spin7 {
+    from {
+        transform: translateX(-50%) translateY(-50%) rotate(0deg);
+    }
+    to {
+        transform: translateX(-50%) translateY(-50%) rotate(360deg);
+    }
+}
+
+@keyframes spin10 {
+    from {
+        transform: translateX(-50%) translateY(-50%) rotate(0deg);
+    }
+    to {
+        transform: translateX(-50%) translateY(-50%) rotate(360deg);
+    }
+}
+
+/* Center the start button */
+#start-button {
+    position: absolute;
+    text-align: center;
+    top: 50%;
+    left: 50%;
+    padding: 10px 20px;
+    font-size: 20px;
+    cursor: pointer;
+    background-color: #00a2ff3d;
+    color: white;
+    border-color: #47008a;
+    border-radius: 5px;
+    transition: background-color 0.1s, scale 0.3s, border-color 0.3s;
+}
+
+#start-button:hover {
+    background-color: #9b0500;
+    border-color: #ffd000;
+    scale: 1.5;
+}
+
+#start-button:hover ~ #hoverLock1 {
+    visibility: visible;
+}
+
+@keyframes spin8 {
+    from {
+        transform: translateX(-50%) translateY(-50%) rotate(0deg);
+    }
+    to {
+        transform: translateX(-50%) translateY(-50%) rotate(-360deg);
+    }
+}
+
+/* Hidden elements that will appear after the button click */
+#main-header, #game-board {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s ease-in-out;
 }
 
 header {
@@ -183,20 +427,21 @@ aside .box.selected {
 
 #play-button {
     position: absolute;
-    bottom: 20px;
-    left: 50%;
-    transform: translateX(-50%);
-    padding: 10px 20px;
-    background-color: #241700;
+    bottom: 2%;
+    right: 1rem;
+    width: 100px;
+    padding: 10px 10px;
+    background-color: #0baa20;
     color: #ffffff;
     border: 2px solid #ffffff;
     cursor: pointer;
     display: none; /* Initially hidden */
-    transition: background-color 0.3s, transform 0.2s ease-in-out;
+    transition: background-color 0.3s, scale 0.3s;
 }
 
 #play-button:hover {
     background-color: #575757;
+    scale: 1.2;
 }
 
 .player-character {
